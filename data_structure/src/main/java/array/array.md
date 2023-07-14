@@ -14,3 +14,11 @@
 | Delete    | O(N)       | O(N)     |
 | Search    | O(N)       | O(log N) |
 | Access    | O(1)       | O(1)     | 
+
+
+
+
+
+### Question for the Stack
+- [How do you find the missing number in a given integer array of 1 to 100?](MissingNumberFromArray.kt)
+- How do you find the duplicate number on a given integer array?
