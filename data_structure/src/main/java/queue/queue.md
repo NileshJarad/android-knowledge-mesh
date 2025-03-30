@@ -6,6 +6,8 @@
 ### Operation of Queue
 - **Enqueue** - The enqueue operation adds an element to the rear of the queue.
 - **Dequeue** - The dequeue operation removes the element from the front of the queue
+- **peek() or front()** - Acquires the data element available at the front node of the queue without deleting it.
+- **rear() or front()** - This operation returns the element at the rear end without removing it.
 
 
 ### Application of stack

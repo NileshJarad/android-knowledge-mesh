@@ -1,35 +1,52 @@
 package tree
 
 fun main() {
+
+    val bstRep = """        
+        2
+       / \
+      1   5
+         /  \
+        3    8
+              \
+              15
+             /
+            9
+"""
     val bst = BinarySearchTree()
-    val root = bst.createBst(arrayOf(2, 5, 3, 8, 15, 9, 1, 2))
-    root?.inOrderTraversal()
-    val isBst = CheckIsBst().inOrderTraversalToCheckBst(root)
+    val root = bst.createBst(arrayOf(2, 5, 3, 8, 15, 9, 1))
+    val isBst = CheckIsBst().isBst(root)
+    println(bstRep)
     println("\nTree isBst = $isBst")
+
+
+    val question = """            
+            1
+           /
+          2
+         / \
+        4   5
+
+"""
+
+    val oneP = BinaryNode(1)
+    oneP.left = BinaryNode(2)
+    oneP.left?.left = BinaryNode(4)
+    oneP.left?.right = BinaryNode(5)
+
+    println(question)
+    val isBst2 = CheckIsBst().isBst(oneP)
+    println("\nTree isBst2 = $isBst2")
 }
 
-/***
- *
- * Ap 1
- *
- * To check the BST we can use one property of BST which is
- * InOrder traversal of the BST is always sorted
- *
- * We can keep track of the last node and check if it's smaller than current else it's not BST
- */
 class CheckIsBst {
-    private var lastNode: BinaryNode<Int>? = null
 
-    fun inOrderTraversalToCheckBst(node: BinaryNode<Int>?): Boolean {
-        if (node == null) {
-            return true
-        }
-
-        // Check that left tree is BST
-        if (!inOrderTraversalToCheckBst(node.left)) {
-            return false
-        }
-        lastNode = node
-        return inOrderTraversalToCheckBst(node.right)
+    fun isBst(node: BinaryNode<Int>?, min: Int = Int.MIN_VALUE, max: Int = Int.MAX_VALUE): Boolean {
+        if (node == null) return true
+         if (node.data <= min ||  node.data >= max) {
+             return false
+         }
+        return isBst(node.left, min, node.data) &&
+                isBst(node.right, node.data, max)
     }
 }

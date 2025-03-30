@@ -109,6 +109,7 @@ Tree is hierarchical (Non-Linear) data structure.
 
 ### Question on the tree
 
+- [Tree miscellaneous function](TreeMiscellaneous.kt)
 - [Check if tree is BST](CheckIsBst.kt)
 - Print left view of the tree
 - Print right view of the tree
