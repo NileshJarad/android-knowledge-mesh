@@ -148,12 +148,12 @@ and ensure that the information is synchronized objects
     - Shared Preference
     - Database
     - File
-6. Threading
-    - Thread
-    - Handler
-    - Looper
-    - Message Queue
-    - Executor
+6. [Threading](android/src/main/kotlin/threading/thread_lopper_handler.md)
+    - [Thread](android/src/main/kotlin/threading/thread_lopper_handler.md#thread)
+    - [Handler](android/src/main/kotlin/threading/thread_lopper_handler.md#handler)
+    - [Looper](android/src/main/kotlin/threading/thread_lopper_handler.md#looper)
+    - [Message Queue](android/src/main/kotlin/threading/thread_lopper_handler.md#message-queue)
+    - [Executor](android/src/main/kotlin/threading/thread_lopper_handler.md#executor)
     - RxJava
     - Co-routine
 7. [Networking](android/src/main/kotlin/networking/networking.md)
