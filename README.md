@@ -173,16 +173,16 @@ and ensure that the information is synchronized objects
 11. Kotlin
     - [Basics](android/src/main/kotlin/kotlin_fundamentals/basics.md)
     - Functions
-        - Higher-order functions
+        - [Higher-order functions](android/src/main/kotlin/kotlin_fundamentals/functions.md#higher-order-function)
         - [Scope functions](android/src/main/kotlin/kotlin_fundamentals/scope_functions.md)
             - [let](android/src/main/kotlin/kotlin_fundamentals/scope_functions.md#let)
             - [run](android/src/main/kotlin/kotlin_fundamentals/scope_functions.md#run)
             - [with](android/src/main/kotlin/kotlin_fundamentals/scope_functions.md#with)
             - [apply](android/src/main/kotlin/kotlin_fundamentals/scope_functions.md#apply)
             - [also](android/src/main/kotlin/kotlin_fundamentals/scope_functions.md#also)
-        - Lambda Functions
-        - Extension function
-        - Infix functions
+        - [Lambda Functions](android/src/main/kotlin/kotlin_fundamentals/functions.md#lambda-function)
+        - [Extension function](android/src/main/kotlin/kotlin_fundamentals/functions.md#extension-functions)
+        - [Infix functions](android/src/main/kotlin/kotlin_fundamentals/functions.md#infix-function)
     - [Class](android/src/main/kotlin/kotlin_fundamentals/classes.md)
         - [Data class](android/src/main/kotlin/kotlin_fundamentals/classes.md#data-class)
         - [Sealed Class](android/src/main/kotlin/kotlin_fundamentals/classes.md#sealed-class)
@@ -193,6 +193,6 @@ and ensure that the information is synchronized objects
 12. [Coroutine](android/src/main/kotlin/coroutine/coroutine.md)
 
 
-## Awesome Behavioral Interviews - https://github.com/ashishps1/awesome-behavioral-interviews
+#### Awesome Behavioral Interviews - https://github.com/ashishps1/awesome-behavioral-interviews
 
 

@@ -112,4 +112,23 @@ val someObject = SomeClass().also {
 }
 ```
 
+**Best Practices**
+- Use let for null checks and transformations.
+- Use apply for modifying objects (builders).
+- Use also for side effects like logging.
+- Use run when operations should return a value.
+- Use with for grouping actions on an object.
+
+
+| Function | Returns           | Used For                                         | Context Object |
+|----------|-------------------|--------------------------------------------------|----------------|
+| `let`    | Last expression   | Transforming or using the result                 | `it`           |
+| `run`    | Last expression   | Performing operations & returning result         | `this`         |
+| `apply`  | The object itself | Configuring an object                            | `this`         |
+| `also`   | The object itself | Additional actions (logging, debugging)          | `it`           |
+| `with`   | Last expression   | Grouping operations without returning the object | `this`         |
+
+
+
+
 ![alt](https://i.ytimg.com/vi/6KL3B4NZauY/maxresdefault.jpg)
