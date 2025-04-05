@@ -35,6 +35,16 @@ Every recursion has below two properties
 
 
 
+Problems
+
+1. [Sum of first natural number](./SumOfNaturalNumber.kt)
+2. [Nth Fibonacci number](./NFibonacciNumber.kt)
+3. [Power function](./Power.kt)
+4. [Check String is palindrome](./Palindrome.kt)
+5. [Reverse Array using recursion](./ReverseArray.kt)
+6. [Generate Power set](./PowerSet.kt)
+7. [Permutation](./Permutation.kt)
+
 
 
 

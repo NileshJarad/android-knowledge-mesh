@@ -1,6 +1,5 @@
 package recursion
 
-
 fun main() {
     printIncreasing(5)
     println()
