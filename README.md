@@ -170,7 +170,15 @@ and ensure that the information is synchronized objects
 8. Security
     - SSL pining
 9. Android Jetpack
-10. Compose
+10. [Compose](android/src/main/kotlin/compose/compose.md)
+    - What are annotations?
+    - What is a composable function?
+    - What is Preview?
+    - What are containers? Box, Column, Row?
+    - [What is LazyColum?](android/src/main/kotlin/compose/compose.md#what-is-lazycolum)
+    - What is a scaffold?
+    - What is a Modifier?
+    - What is state hoist?
 11. Kotlin
     - [Basics](android/src/main/kotlin/kotlin_fundamentals/basics.md)
     - Functions
