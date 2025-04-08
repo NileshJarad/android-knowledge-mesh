@@ -35,7 +35,8 @@
 8. [Tree](data_structure/src/main/java/tree/tree.md)
 9. [Heap](data_structure/src/main/java/heap_priority_queue/heap.md)
 10. [Graph](data_structure/src/main/java/graph/graph.md)
-11. **Java Collections**
+11. [Dynamic Programming](data_structure/src/main/java/dp/dp.md)
+12. **Java Collections**
     1. [HashMap](data_structure/src/main/java/collections/hashmap.md)
 
 ---
