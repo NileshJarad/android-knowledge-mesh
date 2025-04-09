@@ -172,14 +172,37 @@ and ensure that the information is synchronized objects
     - SSL pining
 9. Android Jetpack
 10. [Compose](android/src/main/kotlin/compose/compose.md)
-    - What are annotations?
-    - What is a composable function?
-    - What is Preview?
-    - What are containers? Box, Column, Row?
+    - [What are annotations?](android/src/main/kotlin/compose/compose.md#what-is-a-composable-function)
+    - [What is a composable function?](android/src/main/kotlin/compose/compose.md#what-is-a-composable-function)
+    - [What is Preview?](android/src/main/kotlin/compose/compose.md#what-is-preview)
+    - [What are containers? Box, Column, Row?](android/src/main/kotlin/compose/compose.md#what-are-containers-box-column-row)
     - [What is LazyColum?](android/src/main/kotlin/compose/compose.md#what-is-lazycolum)
-    - What is a scaffold?
-    - What is a Modifier?
-    - What is state hoist?
+    - [What is a scaffold?](android/src/main/kotlin/compose/compose.md#what-is-a-scaffold)
+    - [What is a Modifier?](android/src/main/kotlin/compose/compose.md#what-is-a-modifier)
+    - [What is state hoist?](android/src/main/kotlin/compose/compose.md#what-is-state-hoist)
+    - [What is composition?](android/src/main/kotlin/compose/compose.md#what-is-composition)
+    - [What is the composition cycle? enter -> recompose -> exit](android/src/main/kotlin/compose/compose.md#what-is-the-composition-cycle-enter---recompose---exit) 
+    - [What is recomposition?](android/src/main/kotlin/compose/compose.md#what-is-recomposition) 
+    - [How does recomposition trigger?](android/src/main/kotlin/compose/compose.md#how-does-recomposition-trigger) 
+    - [When recomposition trigger?](android/src/main/kotlin/compose/compose.md#when-recomposition-trigger) 
+    - [What is the state of your app, state of data, and state wrapper?](android/src/main/kotlin/compose/compose.md#what-is-the-state-of-your-app-state-of-data-and-state-wrapper) 
+    - [What is mutableStateOf?](android/src/main/kotlin/compose/compose.md#what-is-mutablestateof) 
+    - [What is remember?](android/src/main/kotlin/compose/compose.md#what-is-remember-) 
+    - [In how many ways can you use remember?](android/src/main/kotlin/compose/compose.md#in-how-many-ways-can-you-use-remember) 
+    - [What is rememberSaveable?](android/src/main/kotlin/compose/compose.md#what-is-remembersaveable-) 
+    - [What is Saver?](android/src/main/kotlin/compose/compose.md#what-is-saver) 
+    - [How does rememberSaveable internally work?](android/src/main/kotlin/compose/compose.md#how-does-remembersaveable-internally-work) 
+    - [What are the Side Effects?](android/src/main/kotlin/compose/compose.md#what-are-the-side-effects)
+      - [What is Launched Effect?](android/src/main/kotlin/compose/compose.md#what-is-launched-effect)
+      - [What is SideEffect Block?](android/src/main/kotlin/compose/compose.md#what-is-sideeffect-block)
+      - [What is rememberUpdatedState?](android/src/main/kotlin/compose/compose.md#what-is-rememberupdatedstate)
+      - [What is DisposableEffect?](android/src/main/kotlin/compose/compose.md#what-is-disposableeffect)
+      - [What is rememberCoroutineScope?](android/src/main/kotlin/compose/compose.md#what-is-remembercoroutinescope)
+      - [What is derivedStateOf?](android/src/main/kotlin/compose/compose.md#what-is-derivedstateof)
+      - [What is produceState?](android/src/main/kotlin/compose/compose.md#what-is-producestate)
+      - [What is the order of execution of all?](android/src/main/kotlin/compose/compose.md#what-is-the-order-of-execution-of-all)
+      - [When to use which side effect?](android/src/main/kotlin/compose/compose.md#when-to-use-which-side-effect)
+    
 11. Kotlin
     - [Basics](android/src/main/kotlin/kotlin_fundamentals/basics.md)
     - Functions
@@ -198,8 +221,7 @@ and ensure that the information is synchronized objects
         - [Sealed Class](android/src/main/kotlin/kotlin_fundamentals/classes.md#sealed-class)
         - [Enum class](android/src/main/kotlin/kotlin_fundamentals/classes.md#enum-class)
         - [value class](android/src/main/kotlin/kotlin_fundamentals/classes.md#value-class)
-
-
+        - 
 12. [Coroutine](android/src/main/kotlin/coroutine/coroutine.md)
 
 
