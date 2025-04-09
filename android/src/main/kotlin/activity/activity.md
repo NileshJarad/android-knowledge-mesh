@@ -1,0 +1,165 @@
+# Activity
+
+An activity provides the window in which the app draws its UI. This window typically fills the screen but may be smaller than the screen and float on top of other windows. Generally, one activity implements one screen in an app
+
+## Activity lifecycle methods:
+
+1. **onCreate()**
+   - **_Called When_** - The activity is first created (only once per instance).
+   - **_Purpose_** - Initialize the activity. Setup Views, restore states
+
+2. **onStart()**
+   - **_Called When_**: After onCreate() or when coming back from background.
+   - **_Purpose_**: Make the activity visible to the user, but not interactive yet.
+
+3. **onResume()**
+   - **_Called When_**: After onStart() or when returning from a paused state.
+   - **_Purpose_**: The activity is now in the foreground and the user can interact with it.
+4. **onPause()**
+
+   - **_Called When_**: Activity is partially obscured, like:
+     - A new activity is started 
+     - A dialog appears
+   - **_Purpose_**:
+     - Pause animations, music, or video 
+     - Save unsaved data (if lightweight)
+
+5. **onStop()**
+   - **_Called When_**: Activity is no longer visible (completely hidden).
+
+   - **_Purpose_**:
+     - Release resources that are not needed when off-screen
+     - Stop heavy processes
+
+6. **onRestart()**
+
+   - **Called When**: The user navigates back to the activity from the stopped state (e.g., back button).
+   - **Purpose**: Prepare the activity to go back into foreground.
+
+7. **onDestroy()**
+
+   - **_Called When_**:
+     - The activity is finishing (user presses back or calls finish())
+     - The system destroys the activity (e.g., configuration change)
+
+   - **_Purpose_**: Cleanup all resources to avoid memory leaks
+
+
+## Starting a New Activity and Coming back
+
+**Launch  MainActivity**
+- MainActivity: onCreate()
+- MainActivity: onStart()
+- MainActivity: onResume()
+
+**Launch Flow (from MainActivity to SecondActivity):**
+- MainActivity: onPause()
+- SecondActivity: onCreate()
+- SecondActivity: onStart()
+- SecondActivity: onResume()
+- MainActivity: onStop()
+
+**Press Back (from SecondActivity to MainActivity):**
+
+- SecondActivity: onPause()
+- MainActivity: onRestart()
+- MainActivity: onStart()
+- MainActivity: onResume()
+- SecondActivity: onStop()
+- SecondActivity: onDestroy()
+
+
+## Starting a New Activity and user press home button 
+
+- MainActivity: onCreate()
+- MainActivity: onStart()
+- MainActivity: onResume()
+- MainActivity: onPause()
+- MainActivity: onStop() - _The activity is not destroyed. It just goes to the background (stopped state), and stays in memory (unless Android kills it due to low memory)._
+
+
+
+## Scenario: System Dialog appears on top of your activity
+
+- Incoming call screen
+- Battery saver alert 
+- Permission dialog 
+- Airplane mode warning 
+- Notification drawer being pulled (only partial impact)
+
+### Depends on whether the dialog is:
+- Partially obstructing (e.g., floating permission dialog)
+- Fully covering (e.g., system alert that takes full focus)
+
+### Android Activity Lifecycle – System Dialog Summary
+| 🧪 System Dialog Type       | 📱 Activity Visibility           | 🔁 Lifecycle Methods Called            | 🧷 Final Activity State |
+|-----------------------------|----------------------------------|----------------------------------------|-------------------------|
+| Permission Dialog (partial) | Partially visible                | `onPause()`                            | Paused                  |
+| Incoming Call Screen        | Not visible (fully covered)      | `onPause()`, `onStop()`                | Stopped                 |
+| Battery/Low Power Alert     | Depends (partial/full)           | `onPause()` or `onPause()`, `onStop()` | Paused / Stopped        |
+| Notification Drawer Pull    | Still visible (no loss of focus) | *(No lifecycle method called)*         | Resumed                 |
+| Airplane Mode Toggle Dialog | Partially visible                | `onPause()`                            | Paused                  |
+
+### When Dialog is Dismissed
+
+| 💬 Previous State | 🚀 Lifecycle Methods Called on Return    |
+|-------------------|------------------------------------------|
+| Paused            | `onResume()`                             |
+| Stopped           | `onRestart()`, `onStart()`, `onResume()` |
+
+
+---
+
+## Questions
+1. We have two launcher activities defined in our manifest file. While running the application, What will be the outcome?
+>If you have two launcher Activities in your manifest When running the application, It will install two instances of the application(both instances behave the same). If you uninstall any one instance of the app, both instances will be uninstalled.
+
+
+2. What happens to the activity when the device is rotated?
+> The activity is destroyed and recreated by default. This happens because rotation triggers a configuration change.
+> 
+> onPause() → onStop() → onDestroy()
+> 
+> onCreate() → onStart() → onResume()
+3. What's the difference between finish() and pressing the back button?
+>  Both will:
+> Call onPause() → onStop() → onDestroy() on the current activity.
+> 
+> But:
+> 
+> finish() is programmatic — you call it explicitly in code.
+>
+>Back button is user-driven, and may be intercepted via onBackPressedDispatcher.
+
+4. Can an activity be in the onPause state but still be visible?
+> Yes.
+>
+> Example: A dialog or transparent activity appears on top.
+>
+> The underlying activity is paused, but still partially visible.
+5. What if you call finish() inside onCreate()?
+> The activity is created, then immediately destroyed.
+>
+> Lifecycle calls:
+> onCreate() → onDestroy()
+> 
+> onStart() and onResume() are not called.
+
+6. What happens if two activities have the same intent filter with MAIN and LAUNCHER?
+> When you launch the app, the system will ask you which one to open, showing a chooser dialog.
+>
+> If one is marked as “Always”, that becomes the default launcher.
+7. What if the system kills the activity in the background? Will onDestroy() be called?
+> ❌ No.
+>
+>If the system kills your activity (e.g., low memory), onDestroy() is NOT guaranteed to be called.
+>
+>You must save essential data in onSaveInstanceState().
+8. Is onStop() always called before onDestroy()?
+>  ✅ Yes, in most cases.
+>
+>However:
+>
+>If the system is under heavy load, it might skip onStop(), especially in low memory scenarios. But this is rare.
+
+        

@@ -132,13 +132,13 @@ and ensure that the information is synchronized objects
 ## Android
 
 1. Android Component
-    - Activity
+    - [Activity](android/src/main/kotlin/activity/activity.md)
     - Service
     - Broadcast Receiver
     - Content Provider
-2. Intent
-    - Types of intent
-    - Intent Filter
+2. [Intent](android/src/main/kotlin/activity/intent.md)
+    - [Types of intent](android/src/main/kotlin/activity/intent.md#types-of-intent)
+    - [Intent Filter](android/src/main/kotlin/activity/intent.md#intent-filters)
 3. Launch mode
     - Standard
     - Single Top
