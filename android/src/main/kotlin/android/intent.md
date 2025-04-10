@@ -6,14 +6,14 @@
 An Intent is a messaging object used to request an action from another app component. It is used to start activities, services, or deliver a broadcast.
 
 **Basic Uses of Intent:**
-- Start an activity 
+- Start an android 
 - Start a service 
 - Deliver a broadcast
 
 ### Types of Intent
 - **Explicit Intent**
   - Used to start a specific component (Activity/Service) within the same application. 
-  - Use Case: Navigating from one activity to another
+  - Use Case: Navigating from one android to another
   
 ```kotlin
 val intent = Intent(this, SecondActivity::class.java)
@@ -85,7 +85,7 @@ startActivity(Intent.createChooser(intent, "Send Email"))
 
 | Action                             | Description                                                                                        |
 |------------------------------------|----------------------------------------------------------------------------------------------------|
-| `Intent.ACTION_MAIN`               | Entry point of the app. Used to launch the main activity. Usually paired with `CATEGORY_LAUNCHER`. |
+| `Intent.ACTION_MAIN`               | Entry point of the app. Used to launch the main android. Usually paired with `CATEGORY_LAUNCHER`. |
 | `Intent.ACTION_VIEW`               | Display data to the user (e.g., open a URL, image, or contact).                                    |
 | `Intent.ACTION_SEND`               | Send data to another app (e.g., share text or files).                                              |
 | `Intent.ACTION_SENDTO`             | Send data to a specific recipient (e.g., email or SMS app).                                        |
@@ -107,12 +107,12 @@ startActivity(Intent.createChooser(intent, "Send Email"))
 
 | Category                               | Description                                                                             |
 |----------------------------------------|-----------------------------------------------------------------------------------------|
-| `Intent.CATEGORY_DEFAULT`              | Must be included for any activity that responds to an implicit intent.                  |
-| `Intent.CATEGORY_LAUNCHER`             | Indicates that this activity should be displayed in the app launcher as an entry point. |
-| `Intent.CATEGORY_BROWSABLE`            | Allows the activity to be started from a web browser (e.g., via an HTTP link).          |
+| `Intent.CATEGORY_DEFAULT`              | Must be included for any android that responds to an implicit intent.                  |
+| `Intent.CATEGORY_LAUNCHER`             | Indicates that this android should be displayed in the app launcher as an entry point. |
+| `Intent.CATEGORY_BROWSABLE`            | Allows the android to be started from a web browser (e.g., via an HTTP link).          |
 | `Intent.CATEGORY_ALTERNATIVE`          | Provides an alternative action the user can perform on data.                            |
 | `Intent.CATEGORY_SELECTED_ALTERNATIVE` | Indicates the user has selected an alternative action.                                  |
-| `Intent.CATEGORY_HOME`                 | Main home screen activity (like launchers).                                             |
+| `Intent.CATEGORY_HOME`                 | Main home screen android (like launchers).                                             |
 | `Intent.CATEGORY_APP_EMAIL`            | Designates app as an email client.                                                      |
 | `Intent.CATEGORY_APP_MESSAGING`        | Designates app as a messaging client.                                                   |
 | `Intent.CATEGORY_APP_CONTACTS`         | Designates app as a contacts app.                                                       |

@@ -132,18 +132,18 @@ and ensure that the information is synchronized objects
 ## Android
 
 1. Android Component
-    - [Activity](android/src/main/kotlin/activity/activity.md)
+    - [Activity](android/src/main/kotlin/android/activity.md)
     - Service
     - Broadcast Receiver
     - Content Provider
-2. [Intent](android/src/main/kotlin/activity/intent.md)
-    - [Types of intent](android/src/main/kotlin/activity/intent.md#types-of-intent)
-    - [Intent Filter](android/src/main/kotlin/activity/intent.md#intent-filters)
-3. Launch mode
-    - Standard
-    - Single Top
-    - Single Task
-    - Single Instance
+2. [Intent](android/src/main/kotlin/android/intent.md)
+    - [Types of intent](android/src/main/kotlin/android/intent.md#types-of-intent)
+    - [Intent Filter](android/src/main/kotlin/android/intent.md#intent-filters)
+3. [Launch mode](android/src/main/kotlin/android/launch_mode.md)
+    - [Standard](android/src/main/kotlin/android/launch_mode.md#1-standard-default)
+    - [Single Top](android/src/main/kotlin/android/launch_mode.md#2-singletop-)
+    - [Single Task](android/src/main/kotlin/android/launch_mode.md#3-singletask)
+    - [Single Instance](android/src/main/kotlin/android/launch_mode.md#4-singleinstance)
 4. Fragments
     - Fragment Lifecycle
 5. Storage
