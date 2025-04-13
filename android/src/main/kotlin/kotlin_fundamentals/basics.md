@@ -114,7 +114,7 @@ Both companion object and object are used to define singleton-like behavior, but
 ```
 
 ```kotlin
-1..5 downTo 1 step 2 // 5,3,1
+5 downTo 1 step 2 // 5,3,1
 ```
 
 ```kotlin
