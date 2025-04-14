@@ -27,8 +27,10 @@ In Kotlin, classes are final by default, meaning they cannot be inherited unless
 
 ## Backing field
 
+- Kotlin's properties have implicit support for getters and setters. When you define a custom getter or setter and want to access the value within the setter or getter, you need to use the backing field, which is referenced using the field keyword
 - The **field** identifier can only be used in the accessors of the property.
 - A backing field will be generated for a property if usage of the `field` keyword is required.
+- Use a backing field when you define a custom getter/setter AND need to store a value internally for that property.
 
 ```kotlin
 var counter = 0 // the initializer assigns the backing field directly
@@ -40,8 +42,27 @@ var counter = 0 // the initializer assigns the backing field directly
 
 var name : String = "" // no backing field will be generated
 
-var isCountSet: Boolean // no backing field will be genrated
+var isCountSet: Boolean // no backing field will be generated
   get() = counter != 0
+
+```
+
+**Why is Backing Field Needed?**
+
+Without a backing field, if you try to access the property inside its own getter/setter, you will end up with infinite recursion.
+
+
+**_Wrong way (causes stack overflow):_**
+
+```kotlin
+var name: String = "Guest"
+    get() = name  // ❌ This recursively calls the getter itself!
+```
+
+**_Correct way (uses backing field):_**
+```kotlin
+var name: String = "Guest"
+    get() = field
 
 ```
 
@@ -145,9 +166,67 @@ fun main() {
 
 
 ## Enum class
+An enum class in Kotlin (and Android) is a special class used to define a set of constants. These constants are often related and known at compile time.
+
+Think of it like a list of named values that represent a finite set of options, like days of the week, directions, states, etc.
+
+
+```kotlin
+enum class Direction {
+    NORTH, SOUTH, EAST, WEST
+}
+
+Usage :
+
+val dir: Direction = Direction.NORTH
+
+```
+
+**Enum with Properties and Methods**
+
+````kotlin
+enum class Status(val code: Int) {
+    SUCCESS(200),
+    ERROR(500),
+    LOADING(102);
+
+    fun isError(): Boolean = this == ERROR
+}
+
+
+val status = Status.ERROR
+println(status.code)        // Output: 500
+println(status.isError())   // Output: true
+
+
+````
+
 ## Value class
+
+A value class is a Kotlin class that wraps a single property but avoids creating an object at runtime (under certain conditions) — meaning it’s more memory-efficient.
+
+Think of it as a way to give semantic meaning to a simple value.
 
 ```kotlin
 @JvmInline
-value class Password(private val s: String)
+value class UserId(val id: String)
+
+
+val user = UserId("abc123")
+println(user.id)
+
+```
+
+**Why Use value class?**
+
+Without value class:
+
+```kotlin
+fun getUser(id: String) { ... } // What is this String?
+```
+
+With value class:
+
+```kotlin
+fun getUser(id: UserId) { ... } // Much clearer!
 ```
