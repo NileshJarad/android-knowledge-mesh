@@ -21,7 +21,7 @@
 ## Sorting
 1. **[Selection sort](data_structure/src/main/java/sorting/selection_sort.md)** - Find the minimum element in the unsorted portion of the array and swap it with the first unsorted element. 
 2. **[Bubble sort](data_structure/src/main/java/sorting/bubble_sort.md)** - comparing adjacent pairs of elements and swapping them if they are in the wrong order. After each pass, the largest unsorted element is placed in its correct position
-2. **[Insertion sort](data_structure/src/main/java/sorting/insertion_sort.md)** - Build up a sorted sub-array from left to right by inserting each new element into its correct position in the sub-array. Repeat until the array is fully sorted.
+3. **[Insertion sort](data_structure/src/main/java/sorting/insertion_sort.md)** - Build up a sorted sub-array from left to right by inserting each new element into its correct position in the sub-array. Repeat until the array is fully sorted.
 
 ## Data Structure
 
@@ -133,7 +133,7 @@ and ensure that the information is synchronized objects
 
 1. Android Component
     - [Activity](android/src/main/kotlin/android/activity.md)
-    - Service
+    - [Service / WorkManager](android/src/main/kotlin/android/service.md)
     - Broadcast Receiver
     - Content Provider
 2. [Intent](android/src/main/kotlin/android/intent.md)
@@ -169,7 +169,20 @@ and ensure that the information is synchronized objects
     - Server Side Event (SSE)
     - Auth refresh tokens
 8. Security
-    - SSL pining
+    - Secure Communication 
+      - HTTPS and SSL/TLS
+      - SSL pining
+      - Network Security Config (XML)
+    - App Signing & Integrity
+      - Progaurd
+      - APK signing (v1, v2, v3, v4 schemes)
+      - Play Integrity API
+    - Android Keystore System
+      - Generating and storing keys securely
+      - Hardware-backed keystore (StrongBox)
+      - Usage for cryptography (RSA, AES, HMAC)
+    - Tap jacking
+    - 
 9. Android Jetpack
 10. [Compose](android/src/main/kotlin/compose/compose.md)
     - [What are annotations?](android/src/main/kotlin/compose/compose.md#what-is-a-composable-function)
