@@ -73,7 +73,7 @@ Result:
 Task 1: A → B → C  
 Task 2: D
 
-Now if you press back in D → You’ll go to Home Screen, not C
+Now if you press back in D → You’ll go to last opened activity in Android stack if it's empty then it will got Home screen
 
 ```
 
