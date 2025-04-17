@@ -44,6 +44,7 @@ Problems
 5. [Reverse Array using recursion](./ReverseArray.kt)
 6. [Generate Power set](./PowerSet.kt)
 7. [Permutation](./Permutation.kt)
+7. [Permutation](./NQueen.kt)
 
 
 
