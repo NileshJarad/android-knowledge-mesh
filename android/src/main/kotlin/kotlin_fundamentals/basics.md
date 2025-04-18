@@ -14,7 +14,7 @@
   ```
 
 - `lateinit` is used for properties that are initialized later, after the object creation. It is mainly used with non-null properties of classes that cannot be initialized in constructors.
-- `lazy` is a function that takes a lambda and returns an instance of Lazy<T> which can be used to access the lazily computed value.
+- `lazy` is a function that takes a lambda and returns an instance of Lazy<T>, which can be used to access the lazily computed value.
 
     > Remember, lateinit should be used with caution, as accessing an uninitialized lateinit property will throw an exception. lazy is thread-safe by default and will compute the value only once, on the first access, making it suitable for lazy initialization.
 
@@ -25,6 +25,7 @@
       lateinit var lateInitVar: String
   
       val lazyVar: String by lazy {
+          println("Lazy block executed for the First time") // this will only be executed once in first intialisation
           "Lazy initialized value"
       }
   }
