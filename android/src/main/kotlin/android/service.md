@@ -413,8 +413,8 @@ WorkManager.getInstance(context)
 > The system will re-deliver the same intent, potentially downloading the same file twice if you're not careful.
 
 **Q.** Can a Service run indefinitely in the background without being foreground or bound?
-ANope. Since Android 8+, background services will be stopped by the system unless promoted to foreground (with
-notification).
+>Nope. Since Android 8+, background services will be stopped by the system unless promoted to foreground (with
+>notification).
 
 **Q.** Is it safe to perform heavy work directly in a service?
 > No. Services run on the main thread by default. Heavy work should use Thread, HandlerThread, Coroutine, or
