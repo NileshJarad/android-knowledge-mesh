@@ -28,7 +28,7 @@ So for me it's not leaving anything but learning new curve and contributing in h
 
 ## Conflict between manager
 
-**Example**
+**Example 1**
 
 In my current organisation, I experienced the situation where me and my manager had different working style. 
 I prefer more of independent approach, where I can plan and execute the task keeping stakeholder informed at key checkpoints.
@@ -46,5 +46,6 @@ That small shift improved our collaboration significantly and strengthened our p
 
 What I learned from that experience is the value of proactive communication and adaptability—recognizing that conflict doesn’t have to be negative, but an opportunity for growth and better mutual understanding.
 
+**Example 2**
 
-
+In a previous role, I experienced some tension with my manager due to micromanagement. I prefer working with autonomy, while my manager had a more hands-on style. Instead of letting it affect work, I initiated an open conversation to align our expectations. We agreed on regular check-ins, which gave them visibility and gave me the space to work independently. It improved our collaboration, and I learned how effective communication can resolve most conflicts
