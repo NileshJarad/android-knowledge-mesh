@@ -157,7 +157,7 @@ and ensure that the information is synchronized objects
     - [Message Queue](android/src/main/kotlin/threading/thread_lopper_handler.md#message-queue)
     - [Executor](android/src/main/kotlin/threading/thread_lopper_handler.md#executor)
     - RxJava
-    - Co-routine
+    - [Co-routine](android/src/main/kotlin/coroutine/coroutine.md)
 7. [Networking](android/src/main/kotlin/networking/networking.md)
     - REST API
     - [HTTP status code](android/src/main/kotlin/networking/networking.md#http-status-code)
