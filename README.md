@@ -134,8 +134,8 @@ and ensure that the information is synchronized objects
 1. Android Component
     - [Activity](android/src/main/kotlin/android/activity.md)
     - [Service / WorkManager](android/src/main/kotlin/android/service.md)
-    - Broadcast Receiver
-    - Content Provider
+    - [Broadcast Receiver](android/src/main/kotlin/android/broadcast_receiver.md)
+    - [Content Provider](android/src/main/kotlin/android/content_provider.md)
 2. [Intent](android/src/main/kotlin/android/intent.md)
     - [Types of intent](android/src/main/kotlin/android/intent.md#types-of-intent)
     - [Intent Filter](android/src/main/kotlin/android/intent.md#intent-filters)
