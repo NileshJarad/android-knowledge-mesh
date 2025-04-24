@@ -110,6 +110,42 @@ An android provides the window in which the app draws its UI. This window typica
 
 ---
 
+
+## Android Activity Priority Levels
+
+When the Android system is low on memory and needs to reclaim resources, it decides which activity or component to kill based on priority and recency, not just the runtime duration (short-run vs long-run). Let's break it down clearly.
+
+Android assigns importance levels (often referred to as "priority") to each process. The system kills the lowest priority process first when memory is needed.
+
+**From highest to lowest priority:**
+
+1. Foreground Activity – currently visible and interacting with the user.
+
+2. Visible Activity – visible but not in the foreground (e.g., dialog partially over it).
+
+3. Service Process – running a foreground or background service.
+
+4. Background Activity – not visible, in back stack.
+
+5. Empty Process – not holding any active component, just cached for faster reload.
+
+
+
+### Important Concepts
+- Both activities having same priority usually means they are in the background state.
+- When multiple background activities are candidates for killing:
+
+  - The system considers memory consumption, process age, and LRU (Least Recently Used) order.
+
+  - Long-running background activity may have higher memory usage.
+
+  - If both are equally recent in the LRU list, the one consuming more memory is more likely to be killed.
+
+  - If all else is equal, the oldest one (least recently used) will be killed first.
+
+----
+
+
 ## Questions
 1. We have two launcher activities defined in our manifest file. While running the application, What will be the outcome?
 >If you have two launcher Activities in your manifest When running the application, It will install two instances of the application(both instances behave the same). If you uninstall any one instance of the app, both instances will be uninstalled.
