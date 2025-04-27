@@ -35,7 +35,7 @@ public final class Singleton {
     static class Thread1 implements Runnable {
         @Override
         public void run() {
-            Singleton singleton = Singleton.getInstance("1");
+            Singleton singleton = Singleton.getInstance();
             System.out.println(singleton);
         }
     }
@@ -43,7 +43,7 @@ public final class Singleton {
     static class Thread2 implements Runnable {
         @Override
         public void run() {
-            Singleton singleton = Singleton.getInstance("2");
+            Singleton singleton = Singleton.getInstance();
             System.out.println(singleton);
         }
     }
