@@ -205,16 +205,8 @@ and ensure that the information is synchronized objects
     - [What is rememberSaveable?](android/src/main/kotlin/compose/compose.md#what-is-remembersaveable-) 
     - [What is Saver?](android/src/main/kotlin/compose/compose.md#what-is-saver) 
     - [How does rememberSaveable internally work?](android/src/main/kotlin/compose/compose.md#how-does-remembersaveable-internally-work) 
-    - [What are the Side Effects?](android/src/main/kotlin/compose/compose.md#what-are-the-side-effects)
-      - [What is Launched Effect?](android/src/main/kotlin/compose/compose.md#what-is-launched-effect)
-      - [What is SideEffect Block?](android/src/main/kotlin/compose/compose.md#what-is-sideeffect-block)
-      - [What is rememberUpdatedState?](android/src/main/kotlin/compose/compose.md#what-is-rememberupdatedstate)
-      - [What is DisposableEffect?](android/src/main/kotlin/compose/compose.md#what-is-disposableeffect)
-      - [What is rememberCoroutineScope?](android/src/main/kotlin/compose/compose.md#what-is-remembercoroutinescope)
-      - [What is derivedStateOf?](android/src/main/kotlin/compose/compose.md#what-is-derivedstateof)
-      - [What is produceState?](android/src/main/kotlin/compose/compose.md#what-is-producestate)
-      - [What is the order of execution of all?](android/src/main/kotlin/compose/compose.md#what-is-the-order-of-execution-of-all)
-      - [When to use which side effect?](android/src/main/kotlin/compose/compose.md#when-to-use-which-side-effect)
+    - [What are the Side Effects?](android/src/main/kotlin/compose/side_effects.md)
+     
     
 11. Kotlin
     - [Basics](android/src/main/kotlin/kotlin_fundamentals/basics.md)
