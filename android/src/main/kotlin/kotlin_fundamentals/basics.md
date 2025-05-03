@@ -96,6 +96,7 @@ Both companion object and object are used to define singleton-like behavior, but
   
   ```
 
+----
 
 ## Range Operator
 ```kotlin
@@ -125,6 +126,38 @@ Both companion object and object are used to define singleton-like behavior, but
 ```kotlin
 1..<4 // 1,2,3 
 ```
+
+--- 
+
+## Ways to initialise Int Array
+
+- **Using IntArray**
+    ```kotlin
+    val arr = IntArray(5) // [0, 0, 0, 0, 0]
+    ```
+- **Using IntArray  lambda to set values**
+    ```kotlin
+    //Each index it is passed to the lambda.
+    val arr = IntArray(5) { it * 2 } // [0, 2, 4, 6, 8]
+    ```
+- **Using .fill() after creating an array**
+```kotlin
+val arr = IntArray(5)
+arr.fill(7) // arr becomes [7, 7, 7, 7, 7]
+```
+
+- **Using arrayOf() and converting to IntArray**
+    ```kotlin
+    // Using Array<Int> and converting to IntArray
+    
+    val arr = arrayOf(1, 2, 3).toIntArray() // [1, 2, 3]
+    ```
+- **Using intArrayOf() directly**
+    ```kotlin
+    val arr = intArrayOf(10, 20, 30) // [10, 20, 30]
+    
+    ```
+ 
 
 
 ## Elvis Operator (?:) and Safe Call Operator (?.) 
