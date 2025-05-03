@@ -5,39 +5,63 @@ Subtypes must be substitutable for their base types. In simpler terms, any insta
 
 ### Bad Code Example
 
-```agsl
-class Bird {
-    fun fly() {
-        // implement flying behavior for birds
+```kotlin
+open class Bird {
+    open fun fly() {
+        println("Bird is flying")
     }
 }
 
-class Penguin : Bird() { 
-// penguins cannot fly, so we do not implement the fly() method
+class Ostrich : Bird() {
+    override fun fly() {
+        // ❌ Ostriches can't fly — this breaks expected behavior
+        throw UnsupportedOperationException("Ostrich can't fly")
+    }
+}
+
+fun makeBirdFly(bird: Bird) {
+    bird.fly()
 }
 
 ```
 
-In above example, the `Penguin` class violates the **LSP** because it inherits the `fly()` method from the `Bird` class, but penguins cannot fly.
+- Ostrich is a Bird, but it can’t fly.
+- Calling makeBirdFly(Ostrich()) will crash — it violates the expectations of the base type.
 
 ### Good Code Example
 
-```agsl
-interface Flyable {
+```kotlin
+interface Bird {
+    fun eat()
+}
+
+interface FlyingBird : Bird {
     fun fly()
 }
 
-class Bird : Flyable {
+class Sparrow : FlyingBird {
+    override fun eat() {
+        println("Sparrow eating")
+    }
+
     override fun fly() {
-        // implement flying behavior for birds
+        println("Sparrow flying")
     }
 }
 
-class Penguin { 
-// penguins cannot fly, so we do not implement the fly() method
+class Ostrich : Bird {
+    override fun eat() {
+        println("Ostrich eating")
+    }
+}
+
+fun makeBirdFly(bird: FlyingBird) {
+    bird.fly()
 }
 
 ```
 
 
-In the improved code, the Flyable interface has been added, and the Bird class now implements the Flyable interface
+- Sparrow can fly.
+- Ostrich doesn't implement fly() — so can't be passed to makeBirdFly(). 
+- LSP is respected.

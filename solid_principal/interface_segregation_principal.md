@@ -6,65 +6,66 @@ Clients should not be forced to depend on interfaces they do not use. This means
 
 ### Bad Code Example
 
-```agsl
-interface Vehicle {
-    fun start()
-    fun stop()
-    fun accelerate()
-    fun brake()
-    fun turn()
+```kotlin
+interface Worker {
+    fun work()
+    fun eat()
 }
 
-class Car : Vehicle {
-    override fun start() { ... }
-    override fun stop() { ... }
-    override fun accelerate() { ... }
-    override fun brake() { ... }
-    override fun turn() { ... }
+class HumanWorker : Worker {
+    override fun work() {
+        println("Human working")
+    }
+
+    override fun eat() {
+        println("Human eating")
+    }
 }
 
-class Bicycle : Vehicle {
-    override fun start() { ... }
-    override fun stop() { ... }
-    override fun accelerate() { ... } // does not apply to a bicycle
-    override fun brake() { ... }
-    override fun turn() { ... }
+class RobotWorker : Worker {
+    override fun work() {
+        println("Robot working")
+    }
+
+    override fun eat() {
+        // ❌ Robot doesn’t eat — forced to implement irrelevant method
+        throw UnsupportedOperationException("Robot doesn't eat")
+    }
 }
 
 ```
-In above example, the `Vehicle` interface is too generic, and it forces all implementing classes to provide implementations for all of its methods, even if they are not applicable. In this case, the `accelerate()` method is not applicable to a `Bicycle`.
+RobotWorker doesn’t need eat() — but it's forced to implement it, which violates ISP.
+
+
 
 ### Good Code Example
 
-```agsl
-interface Startable {
-    fun start()
-    fun stop()
+```kotlin
+interface Workable {
+    fun work()
 }
 
-interface Acceleratable {
-    fun accelerate()
-    fun brake()
+interface Eatable {
+    fun eat()
 }
 
-interface Turnable {
-    fun turn()
+class HumanWorker : Workable, Eatable {
+    override fun work() {
+        println("Human working")
+    }
+
+    override fun eat() {
+        println("Human eating")
+    }
 }
 
-class Car : Startable, Acceleratable, Turnable {
-    override fun start() { ... }
-    override fun stop() { ... }
-    override fun accelerate() { ... }
-    override fun brake() { ... }
-    override fun turn() { ... }
-}
-
-class Bicycle : Startable, Turnable {
-    override fun start() { ... }
-    override fun stop() { ... }
-    override fun turn() { ... }
+class RobotWorker : Workable {
+    override fun work() {
+        println("Robot working")
+    }
 }
 
 ```
 
-n the improved code, the `Vehicle` interface has been broken down into smaller, more specific interfaces, such as `Startable`, `Acceleratable`, and `Turnable`. This allows implementing classes to only implement the methods they need. In this case, the `Bicycle` class only needs to implement `Startable` and `Turnable`, and does not need to implement `Acceleratable` and `brake()`.
+- RobotWorker only implements what it needs.
+- Code is clean, extendable, and respects Interface Segregation.
