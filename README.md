@@ -16,6 +16,7 @@
 1. Time complexity 
 2. [How to Avoid the TLE (Time Limit Exceeded)](./data_structure/src/main/java/algorithms/avoid_tle.md)
 3. [Series](./data_structure/src/main/java/algorithms/series.md)
+4. [Miscellaneous Of Algorithm](./data_structure/src/main/java/algorithms/misc_algorithm.md)
 
 
 ## Sorting
