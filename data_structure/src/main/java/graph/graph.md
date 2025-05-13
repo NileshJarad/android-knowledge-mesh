@@ -129,6 +129,7 @@ Graph traversal is the process of visiting all the nodes in a graph.
   - In BFS, you start at a given node and explore all its neighboring nodes before moving to the next level of nodes. 
   - This approach is often implemented using a queue.
   - Is level order traversal in terms of tree
+  - It goes by step by step
   - [BFS traversal code](BfsTraversal.kt)
 
 

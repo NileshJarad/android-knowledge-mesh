@@ -27,7 +27,8 @@ I have had fulfilling journey of past 5 year in ed tech domain, Where I contribu
 
 So for me it's not leaving anything but learning new curve and contributing in high-impact environment. 
 
-** Example 2**
+**Example 2**
+
 I've been working in the EdTech domain for the past few years, and while it's been a valuable experience, the industry has been facing some challenges lately in terms of growth and stability. Over the last 5 years, I've gained solid experience, and I now feel ready to take on more challenging work that allows me to grow technically and expand my skill set. Unfortunately, my current organization doesn't support internal movement between teams, which limits my ability to explore new technologies or contribute in different capacities. I'm now looking for a role where I can work on impactful projects, keep learning, and stay aligned with the latest industry trends.
 
 ---------------

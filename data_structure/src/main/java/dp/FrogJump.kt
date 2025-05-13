@@ -6,7 +6,8 @@ import kotlin.math.abs
 
 fun main() {
 //    val height = intArrayOf(30, 10, 60, 10, 60, 50)
-    val height = intArrayOf(10, 20, 30, 10)
+//    val height = intArrayOf(10, 20, 30, 10)
+    val height = intArrayOf(10, 3, 40, 5, 25)
     println("Min const for Jump = ${minCost(height)}")
 }
 
