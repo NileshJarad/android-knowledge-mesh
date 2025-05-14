@@ -165,11 +165,11 @@ and ensure that the information is synchronized objects
     - [HTTP status code](android/src/main/kotlin/networking/networking.md#http-status-code)
     - [Retrofit](android/src/main/kotlin/networking/networking.md#retrofit)
     - OkHttp
-    - Interceptors
-    - Caching
+    - [Interceptors](android/src/main/kotlin/networking/networking.md#interceptors)
+    - [Caching](android/src/main/kotlin/networking/networking.md#caching)
     - Multi-part requests
-    - Socket connection
-    - Server Side Event (SSE)
+    - [Socket connection](android/src/main/kotlin/networking/networking.md#socket-connection)
+    - [Server Side Event (SSE)](android/src/main/kotlin/networking/networking.md#server-side-event-sse)
     - Auth refresh tokens
 8. Security
     - Secure Communication 

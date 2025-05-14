@@ -80,6 +80,95 @@ A RESTful API is an API that follows REST principles. It uses HTTP to perform CR
 
 ### Retrofit
 
+Retrofit is a type-safe HTTP client for Android and Java, developed by Square. It's commonly used in Android development
+to simplify the process of making network requests and handling APIs (like REST APIs).
+
+**Key Features of Retrofit:**
+
+* Converts HTTP API into a Kotlin or Java interface
+* Supports GET, POST, PUT, DELETE, etc.
+* Handles JSON serialization (usually with converters like Gson, Moshi, or Kotlinx.serialization)
+* Supports coroutines, RxJava, and callbacks
+* Makes error handling and response parsing easier
+  
+Retrofit uses annotations to describe how HTTP requests are made and how data is sent/received. Here's a categorized list of all major Retrofit annotations, with examples and use cases:
+
+
+**HTTP Method Annotations**
+
+| Annotation | Description           | Example                 |
+|------------|-----------------------|-------------------------|
+| `@GET`     | GET request           | `@GET("users")`         |
+| `@POST`    | POST request          | `@POST("users/create")` |
+| `@PUT`     | Replace resource      | `@PUT("users/{id}")`    |
+| `@PATCH`   | Partially update      | `@PATCH("users/{id}")`  |
+| `@DELETE`  | Delete resource       | `@DELETE("users/{id}")` |
+| `@HEAD`    | Header only (no body) | `@HEAD("users")`        |
+| `@OPTIONS` | Returns HTTP options  | `@OPTIONS("users")`     |
+
+
+**URL and Path Annotations**
+
+| Annotation | Description                  | Example                              |
+|------------|------------------------------|--------------------------------------|
+| `@Path`    | Replace part of the URL path | `@GET("users/{id}")` → `@Path("id")` |
+| `@Url`     | Pass full dynamic URL        | `@GET` + `@Url url: String`          |
+
+**Query Annotations**
+
+Used to append parameters to the URL.
+
+| Annotation  | Description                   | Example                                         |
+|-------------|-------------------------------|-------------------------------------------------|
+| `@Query`    | Single query param            | `@GET("users") fun get(@Query("age") age: Int)` |
+| `@QueryMap` | Multiple query params via map | `@QueryMap params: Map<String, String>`         |
+
+
+**Form and Field Annotations**
+
+Used with @FormUrlEncoded to send application/x-www-form-urlencoded data.
+
+| Annotation        | Description                | Example                                 |
+|-------------------|----------------------------|-----------------------------------------|
+| `@FormUrlEncoded` | Marks request as form data | `@POST("login") @FormUrlEncoded`        |
+| `@Field`          | Send single form field     | `@Field("username")`                    |
+| `@FieldMap`       | Send form fields via a map | `@FieldMap fields: Map<String, String>` |
+
+
+
+**Body and Multipart Annotations**
+
+Used to send raw JSON or files.
+
+| Annotation   | Description                                     | Example                                      |
+|--------------|-------------------------------------------------|----------------------------------------------|
+| `@Body`      | Send raw object (JSON/XML)                      | `@POST("login") fun login(@Body user: User)` |
+| `@Multipart` | Send file or form data as `multipart/form-data` | `@Multipart @POST("upload")`                 |
+| `@Part`      | Individual file/form field                      | `@Part file: MultipartBody.Part`             |
+| `@PartMap`   | Send multiple parts as a map                    | `@PartMap parts: Map<String, RequestBody>`   |
+
+
+
+**Header Annotations**
+
+Used to send static or dynamic headers.
+
+| Annotation   | Description                      | Example                                   |
+|--------------|----------------------------------|-------------------------------------------|
+| `@Header`    | Dynamic header value             | `@Header("Authorization")`                |
+| `@HeaderMap` | Multiple headers via a map       | `@HeaderMap headers: Map<String, String>` |
+| `@Headers`   | Static headers (can be multiple) | `@Headers("Cache-Control: no-cache")`     |
+
+
+**Streaming and Encoding**
+
+| Annotation        | Description                          | Example                         |
+|-------------------|--------------------------------------|---------------------------------|
+| `@Streaming`      | Don't load entire response in memory | `@Streaming @GET("file.zip")`   |
+| `@FormUrlEncoded` | Used for `@Field`-based form posts   | `@FormUrlEncoded @POST("form")` |
+| `@Multipart`      | Used for `@Part` file uploads        | `@Multipart @POST("upload")`    |
+
+
 ---
 
 ### OkHttp
@@ -220,8 +309,6 @@ independently at any time.
 7. Real-Time Location Sharing
     - Uber-like apps, where drivers and passengers share locations in real-time.
 
----
-
 | Feature           | REST API                          | WebSocket                          |
 |-------------------|-----------------------------------|------------------------------------|
 | Direction         | One-way (client → server)         | Two-way (client ⇄ server)          |
@@ -229,6 +316,7 @@ independently at any time.
 | Overhead          | High (each call = new connection) | Low (single persistent connection) |
 | Ideal For         | CRUD, short-lived interactions    | Continuous data exchange           |
 
+----
 
 ### Server Side Event (SSE)
 
@@ -278,4 +366,59 @@ Connection: keep-alive
 
 ### Auth refresh tokens
 
---
+An auth refresh token is a key concept in modern authentication systems that helps maintain a secure and seamless user session without requiring the user to log in repeatedly.
+
+- Access Token: Short-lived token (e.g., valid for 15 minutes) used to authenticate API requests.
+- Refresh Token: Long-lived token (e.g., valid for days/weeks) used to obtain a new access token when it expires.
+
+
+#### How Refresh Token Works
+1. Login 
+   - User logs in with username/password (or OAuth). 
+   - Server responds with:
+     - Access Token (short-lived)
+     - Refresh Token (long-lived)
+
+2. Accessing API
+   - The app uses the access token to access protected resources. 
+   - Once the access token expires, API calls fail with a 401 Unauthorized.
+
+3. Token Refresh
+   - The app sends the refresh token to the server (usually a /refresh-token endpoint). 
+   - If the refresh token is valid, the server responds with a new access token (and optionally a new refresh token). 
+   - The app resumes API calls with the new access token.
+
+4. Logout or Expiry
+   - If the refresh token is invalid (expired, revoked, or tampered), the user must log in again.
+
+#### Why Use Refresh Tokens?
+
+| Feature            | Benefit                                 |
+|--------------------|-----------------------------------------|
+| Short access token | Limits risk if a token is leaked        |
+| Long refresh token | Improves user experience (fewer logins) |
+| Decouples access   | No need to store long-lived credentials |
+| Revokable          | Can blacklist refresh tokens on logout  |
+
+
+#### Security Best Practices
+- Store access token in memory (not localStorage). 
+- Store refresh token securely (e.g., in HttpOnly cookie). 
+- Rotate refresh tokens on each use (prevents reuse). 
+- Invalidate refresh token on logout or suspicious activity.
+
+
+```text
+Client ---------------------> Server
+       (Login credentials)
+            <-------------------------
+     Access Token + Refresh Token
+
+Client ------ [Bearer access_token] ---> API
+API responds <---------------------------
+
+After expiry:
+Client ---- [refresh_token] ---> /refresh-token
+            <----------------------- New tokens
+
+```
