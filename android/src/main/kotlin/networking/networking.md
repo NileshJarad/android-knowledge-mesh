@@ -271,6 +271,51 @@ If the server doesn't send the right caching headers, the caching mechanism will
 
 ### Multi-part requests
 
+A multipart request is an HTTP request that can upload files (images, videos, documents) along with form data (like text fields) using the multipart/form-data content type. This is commonly used for:
+
+Uploading a profile picture with user info
+
+Sending logs/files to a server
+
+**When to Use @Multipart in Retrofit?**
+
+Use @Multipart when you want to send:
+
+   - One or more files
+   - Text + files together
+
+
+**API Interface**
+```kotlin
+interface ApiService {
+    @Multipart
+    @POST("upload/multiple")
+    fun uploadFiles(
+        @Part files: List<MultipartBody.Part>
+    ): Call<ResponseBody>
+}
+```
+
+**Create the List of Files**
+```kotlin
+val file1 = File("path_to_file1.jpg")
+val file2 = File("path_to_file2.jpg")
+val file3 = File("path_to_file3.jpg")
+val file4 = File("path_to_file4.jpg")
+
+fun createPartFromFile(file: File, fieldName: String): MultipartBody.Part {
+    val requestFile = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
+    return MultipartBody.Part.createFormData(fieldName, file.name, requestFile)
+}
+
+val files = listOf(
+    createPartFromFile(file1, "files"),
+    createPartFromFile(file2, "files"),
+    createPartFromFile(file3, "files"),
+    createPartFromFile(file4, "files")
+)
+```
+
 ---
 
 ### Socket connection
