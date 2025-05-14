@@ -149,6 +149,7 @@ and ensure that the information is synchronized objects
     - Fragment Lifecycle
 5. Storage
     - Shared Preference
+    - [EncryptedSharedPreferences](android/src/main/kotlin/security/encrypted_shared_preferences.md)
     - Database
     - File
 6. [Threading](android/src/main/kotlin/threading/thread_lopper_handler.md)
@@ -178,10 +179,7 @@ and ensure that the information is synchronized objects
       - Progaurd
       - APK signing (v1, v2, v3, v4 schemes)
       - Play Integrity API
-    - Android Keystore System
-      - Generating and storing keys securely
-      - Hardware-backed keystore (StrongBox)
-      - Usage for cryptography (RSA, AES, HMAC)
+    - [Android Keystore System](android/src/main/kotlin/security/android_keystore_system.md)
     - Tap jacking
     - 
 9. Android Jetpack
