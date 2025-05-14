@@ -161,12 +161,13 @@ and ensure that the information is synchronized objects
     - RxJava
     - [Co-routine](android/src/main/kotlin/coroutine/coroutine.md)
 7. [Networking](android/src/main/kotlin/networking/networking.md)
-    - REST API
+    - [REST API](android/src/main/kotlin/networking/networking.md#rest-api)
     - [HTTP status code](android/src/main/kotlin/networking/networking.md#http-status-code)
-    - Multi-part requests
+    - [Retrofit](android/src/main/kotlin/networking/networking.md#retrofit)
     - OkHttp
     - Interceptors
     - Caching
+    - Multi-part requests
     - Socket connection
     - Server Side Event (SSE)
     - Auth refresh tokens
