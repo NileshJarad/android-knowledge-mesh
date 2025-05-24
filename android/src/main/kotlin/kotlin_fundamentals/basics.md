@@ -141,10 +141,11 @@ Both companion object and object are used to define singleton-like behavior, but
     val arr = IntArray(5) { it * 2 } // [0, 2, 4, 6, 8]
     ```
 - **Using .fill() after creating an array**
-```kotlin
-val arr = IntArray(5)
-arr.fill(7) // arr becomes [7, 7, 7, 7, 7]
-```
+
+    ```kotlin
+    val arr = IntArray(5)
+    arr.fill(7) // arr becomes [7, 7, 7, 7, 7]
+    ```
 
 - **Using arrayOf() and converting to IntArray**
     ```kotlin
@@ -155,7 +156,6 @@ arr.fill(7) // arr becomes [7, 7, 7, 7, 7]
 - **Using intArrayOf() directly**
     ```kotlin
     val arr = intArrayOf(10, 20, 30) // [10, 20, 30]
-    
     ```
  
 

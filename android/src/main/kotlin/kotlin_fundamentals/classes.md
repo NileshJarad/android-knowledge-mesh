@@ -176,7 +176,7 @@ enum class Direction {
     NORTH, SOUTH, EAST, WEST
 }
 
-Usage :
+Usage:
 
 val dir: Direction = Direction.NORTH
 
@@ -194,12 +194,35 @@ enum class Status(val code: Int) {
 }
 
 
-val status = Status.ERROR
+val status = Status.ERROR  // or Status.values()[1]
 println(status.code)        // Output: 500
 println(status.isError())   // Output: true
 
 
 ````
+
+**Enum with implement**
+
+```kotlin
+interface StatusCode {
+    fun code(): Int
+}
+
+enum class Status : StatusCode {
+    SUCCESS {
+        override fun code() = 200
+    },
+    ERROR {
+        override fun code() = 500
+    }
+}
+
+```
+
+
+**Note:**
+* Enum classes in Kotlin cannot be inherited
+* You can have an enum class implement an interface
 
 ## Value class
 

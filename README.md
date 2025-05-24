@@ -11,18 +11,23 @@
 7. [History re-write](git/git.md#history-re-write)
 8. [Clean up files](git/git.md#clean-up-files)
 
+## Algorithm
 
-## Algorithm 
-1. Time complexity 
+1. Time complexity
 2. [How to Avoid the TLE (Time Limit Exceeded)](./data_structure/src/main/java/algorithms/avoid_tle.md)
 3. [Series](./data_structure/src/main/java/algorithms/series.md)
 4. [Miscellaneous Of Algorithm](./data_structure/src/main/java/algorithms/misc_algorithm.md)
 
-
 ## Sorting
-1. **[Selection sort](data_structure/src/main/java/sorting/selection_sort.md)** - Find the minimum element in the unsorted portion of the array and swap it with the first unsorted element. 
-2. **[Bubble sort](data_structure/src/main/java/sorting/bubble_sort.md)** - comparing adjacent pairs of elements and swapping them if they are in the wrong order. After each pass, the largest unsorted element is placed in its correct position
-3. **[Insertion sort](data_structure/src/main/java/sorting/insertion_sort.md)** - Build up a sorted sub-array from left to right by inserting each new element into its correct position in the sub-array. Repeat until the array is fully sorted.
+
+1. **[Selection sort](data_structure/src/main/java/sorting/selection_sort.md)** - Find the minimum element in the
+   unsorted portion of the array and swap it with the first unsorted element.
+2. **[Bubble sort](data_structure/src/main/java/sorting/bubble_sort.md)** - comparing adjacent pairs of elements and
+   swapping them if they are in the wrong order. After each pass, the largest unsorted element is placed in its correct
+   position
+3. **[Insertion sort](data_structure/src/main/java/sorting/insertion_sort.md)** - Build up a sorted sub-array from left
+   to right by inserting each new element into its correct position in the sub-array. Repeat until the array is fully
+   sorted.
 
 ## Data Structure
 
@@ -43,12 +48,12 @@
 ---
 
 ## Object-Oriented Principals (OOPS)
+
 1. [Class and object](oops_principal/oops.md#clas-and-object)
 2. [Encapsulation](oops_principal/oops.md#encapsulation)
 3. [Abstraction](oops_principal/oops.md#abstraction)
 4. [Inheritance](oops_principal/oops.md#inheritance)
 5. [Polymorphism](oops_principal/oops.md#polymorphism)
-
 
 ---
 
@@ -124,9 +129,9 @@ and ensure that the information is synchronized objects
     2. [Use case and class diagram](system_design/lld/car_rental_system/usecase_class_diagram.md)
     3. [Code](system_design/lld/car_rental_system/code.md)
 3. Parking Lot
-   1. [Requirement](system_design/lld/parking_lot/requirement.md)
-   2. [Usecase and Class diagram](system_design/lld/parking_lot/usecase_class_diagram.md)
-   3. [Code](system_design/lld/parking_lot/code.md)
+    1. [Requirement](system_design/lld/parking_lot/requirement.md)
+    2. [Usecase and Class diagram](system_design/lld/parking_lot/usecase_class_diagram.md)
+    3. [Code](system_design/lld/parking_lot/code.md)
 
 ---
 
@@ -172,17 +177,17 @@ and ensure that the information is synchronized objects
     - [Server Side Event (SSE)](android/src/main/kotlin/networking/networking.md#server-side-event-sse)
     - [Auth refresh tokens](android/src/main/kotlin/networking/networking.md#auth-refresh-tokens)
 8. Security
-    - Secure Communication 
-      - HTTPS and SSL/TLS
-      - SSL pining
-      - Network Security Config (XML)
+    - Secure Communication
+        - HTTPS and SSL/TLS
+        - SSL pining
+        - Network Security Config (XML)
     - App Signing & Integrity
-      - Progaurd
-      - APK signing (v1, v2, v3, v4 schemes)
-      - Play Integrity API
+        - Progaurd
+        - APK signing (v1, v2, v3, v4 schemes)
+        - Play Integrity API
     - [Android Keystore System](android/src/main/kotlin/security/android_keystore_system.md)
     - Tap jacking
-    - 
+    -
 9. Android Jetpack
 10. [Compose](android/src/main/kotlin/compose/compose.md)
     - [What are annotations?](android/src/main/kotlin/compose/compose.md#what-is-a-composable-function)
@@ -194,20 +199,19 @@ and ensure that the information is synchronized objects
     - [What is a Modifier?](android/src/main/kotlin/compose/compose.md#what-is-a-modifier)
     - [What is state hoist?](android/src/main/kotlin/compose/compose.md#what-is-state-hoist)
     - [What is composition?](android/src/main/kotlin/compose/compose.md#what-is-composition)
-    - [What is the composition cycle? enter -> recompose -> exit](android/src/main/kotlin/compose/compose.md#what-is-the-composition-cycle-enter---recompose---exit) 
-    - [What is recomposition?](android/src/main/kotlin/compose/compose.md#what-is-recomposition) 
-    - [How does recomposition trigger?](android/src/main/kotlin/compose/compose.md#how-does-recomposition-trigger) 
-    - [When recomposition trigger?](android/src/main/kotlin/compose/compose.md#when-recomposition-trigger) 
-    - [What is the state of your app, state of data, and state wrapper?](android/src/main/kotlin/compose/compose.md#what-is-the-state-of-your-app-state-of-data-and-state-wrapper) 
-    - [What is mutableStateOf?](android/src/main/kotlin/compose/compose.md#what-is-mutablestateof) 
-    - [What is remember?](android/src/main/kotlin/compose/compose.md#what-is-remember-) 
-    - [In how many ways can you use remember?](android/src/main/kotlin/compose/compose.md#in-how-many-ways-can-you-use-remember) 
-    - [What is rememberSaveable?](android/src/main/kotlin/compose/compose.md#what-is-remembersaveable-) 
-    - [What is Saver?](android/src/main/kotlin/compose/compose.md#what-is-saver) 
-    - [How does rememberSaveable internally work?](android/src/main/kotlin/compose/compose.md#how-does-remembersaveable-internally-work) 
+    - [What is the composition cycle? enter -> recompose -> exit](android/src/main/kotlin/compose/compose.md#what-is-the-composition-cycle-enter---recompose---exit)
+    - [What is recomposition?](android/src/main/kotlin/compose/compose.md#what-is-recomposition)
+    - [How does recomposition trigger?](android/src/main/kotlin/compose/compose.md#how-does-recomposition-trigger)
+    - [When recomposition trigger?](android/src/main/kotlin/compose/compose.md#when-recomposition-trigger)
+    - [What is the state of your app, state of data, and state wrapper?](android/src/main/kotlin/compose/compose.md#what-is-the-state-of-your-app-state-of-data-and-state-wrapper)
+    - [What is mutableStateOf?](android/src/main/kotlin/compose/compose.md#what-is-mutablestateof)
+    - [What is remember?](android/src/main/kotlin/compose/compose.md#what-is-remember-)
+    - [In how many ways can you use remember?](android/src/main/kotlin/compose/compose.md#in-how-many-ways-can-you-use-remember)
+    - [What is rememberSaveable?](android/src/main/kotlin/compose/compose.md#what-is-remembersaveable-)
+    - [What is Saver?](android/src/main/kotlin/compose/compose.md#what-is-saver)
+    - [How does rememberSaveable internally work?](android/src/main/kotlin/compose/compose.md#how-does-remembersaveable-internally-work)
     - [What are the Side Effects?](android/src/main/kotlin/compose/side_effects.md)
-     
-    
+
 11. Kotlin
     - [Basics](android/src/main/kotlin/kotlin_fundamentals/basics.md)
     - Functions
@@ -226,28 +230,28 @@ and ensure that the information is synchronized objects
         - [Sealed Class](android/src/main/kotlin/kotlin_fundamentals/classes.md#sealed-class)
         - [Enum class](android/src/main/kotlin/kotlin_fundamentals/classes.md#enum-class)
         - [value class](android/src/main/kotlin/kotlin_fundamentals/classes.md#value-class)
-        - 
+        -
 12. [Coroutine](android/src/main/kotlin/coroutine/coroutine.md)
 13. Testing
     - Unit test
-      - Turbine
-      - STRIKT
-      - Kotest
-      - mockito
-      - Roboelectric
-      - Mockk
-      - Junit
+        - Turbine
+        - STRIKT
+        - Kotest
+        - mockito
+        - Roboelectric
+        - Mockk
+        - Junit
     - Integration
-      - Paparazi
-      - Roborazzi
-      - MockWebserver
-      - espresso
+        - Paparazi
+        - Roborazzi
+        - MockWebserver
+        - espresso
     - End-to-End testing
-      - Maestro
-      - UIAutomator
-      - Appium
-      - Firebase Test Lab
-14. 
+        - Maestro
+        - UIAutomator
+        - Appium
+        - Firebase Test Lab
+14.
 
 #### Awesome Behavioral Interviews - https://github.com/ashishps1/awesome-behavioral-interviews
 
