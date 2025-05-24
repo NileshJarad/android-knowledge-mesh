@@ -110,6 +110,39 @@ An android provides the window in which the app draws its UI. This window typica
 
 ---
 
+## Start Activity for Result
+
+**1. Define the launcher in your activity or fragment:**
+```kotlin
+private val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+    if (result.resultCode == Activity.RESULT_OK) {
+        val data: Intent? = result.data
+        val resultValue = data?.getStringExtra("key") // Or whatever data you're expecting
+        Toast.makeText(this, "Result: $resultValue", Toast.LENGTH_SHORT).show()
+    }
+}
+```
+
+**2. Launch another activity and expect a result:**
+```kotlin
+val intent = Intent(this, SecondActivity::class.java)
+launcher.launch(intent)
+
+```
+**3. Set result in SecondActivity**
+
+```kotlin
+val resultIntent = Intent()
+resultIntent.putExtra("key", "Some Data")
+setResult(Activity.RESULT_OK, resultIntent)
+finish()
+
+```
+### [List of ActivityResultContracts](https://developer.android.com/reference/androidx/activity/result/contract/ActivityResultContracts)
+
+**Note:**  
+- Each launcher must have a unique name (you cannot define private val activityLauncher multiple times with the same name)
+- Each launcher should be defined only once (in onCreate, or class body, not dynamically inside methods)
 
 ## Android Activity Priority Levels
 
