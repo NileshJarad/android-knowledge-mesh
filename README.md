@@ -32,17 +32,18 @@
 ## Data Structure
 
 1. [Array](data_structure/src/main/java/array/array.md)
-2. [Bitwise Operator](data_structure/src/main/java/bit_manipulation/bitwise_operator.md)
-3. [LinkList](data_structure/src/main/java/linklist/linklist.md)
-4. [Recursion](data_structure/src/main/java/recursion/recursion.md)
-5. [HashTable - (Hashing)](data_structure/src/main/java/hashing/hasshing.md)
-6. [Stack](data_structure/src/main/java/stack/stack.md)
-7. [Queue](data_structure/src/main/java/queue/queue.md)
-8. [Tree](data_structure/src/main/java/tree/tree.md)
-9. [Heap](data_structure/src/main/java/heap_priority_queue/heap.md)
-10. [Graph](data_structure/src/main/java/graph/graph.md)
-11. [Dynamic Programming](data_structure/src/main/java/dp/dp.md)
-12. **Java Collections**
+2. [Binary Search](data_structure/src/main/java/search/binary/binary_search.md)
+3. [Bitwise Operator](data_structure/src/main/java/bit_manipulation/bitwise_operator.md)
+4. [LinkList](data_structure/src/main/java/linklist/linklist.md)
+5. [Recursion](data_structure/src/main/java/recursion/recursion.md)
+6. [HashTable - (Hashing)](data_structure/src/main/java/hashing/hasshing.md)
+7. [Stack](data_structure/src/main/java/stack/stack.md)
+8. [Queue](data_structure/src/main/java/queue/queue.md)
+9. [Tree](data_structure/src/main/java/tree/tree.md)
+10. [Heap](data_structure/src/main/java/heap_priority_queue/heap.md)
+11. [Graph](data_structure/src/main/java/graph/graph.md)
+12. [Dynamic Programming](data_structure/src/main/java/dp/dp.md)
+13. **Java Collections**
     1. [HashMap](data_structure/src/main/java/collections/hashmap.md)
 
 ---
