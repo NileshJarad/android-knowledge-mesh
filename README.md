@@ -151,8 +151,8 @@ and ensure that the information is synchronized objects
     - [Single Top](android/src/main/kotlin/android/launch_mode.md#2-singletop-)
     - [Single Task](android/src/main/kotlin/android/launch_mode.md#3-singletask)
     - [Single Instance](android/src/main/kotlin/android/launch_mode.md#4-singleinstance)
-4. Fragments
-    - Fragment Lifecycle
+4. [Fragments](android/src/main/kotlin/android/fragment.md)
+    - [Fragment Lifecycle](android/src/main/kotlin/android/fragment.md#fragment-lifecycle-methods)
 5. Storage
     - Shared Preference
     - [EncryptedSharedPreferences](android/src/main/kotlin/security/encrypted_shared_preferences.md)

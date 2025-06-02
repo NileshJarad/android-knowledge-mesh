@@ -16,7 +16,7 @@
 
 ``git checkout -b <branch-name>`` - checkout branch
 
-``git swtich <branch-name>`` - checkout branch
+``git switch <branch-name>`` - checkout branch
 
 ### Changes and Commit
 

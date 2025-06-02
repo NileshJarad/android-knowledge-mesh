@@ -5,7 +5,7 @@ An android provides the window in which the app draws its UI. This window typica
 ## Activity lifecycle methods:
 
 1. **onCreate()**
-   - **_Called When_** - The android is first created (only once per instance).
+   - **_Called When_** - The activity is first created (only once per instance).
    - **_Purpose_** - Initialize the android. Setup Views, restore states
 
 2. **onStart()**
@@ -14,7 +14,7 @@ An android provides the window in which the app draws its UI. This window typica
 
 3. **onResume()**
    - **_Called When_**: After onStart() or when returning from a paused state.
-   - **_Purpose_**: The android is now in the foreground and the user can interact with it.
+   - **_Purpose_**: The activity is now in the foreground and the user can interact with it.
 4. **onPause()**
 
    - **_Called When_**: Activity is partially obscured, like:
@@ -39,7 +39,7 @@ An android provides the window in which the app draws its UI. This window typica
 7. **onDestroy()**
 
    - **_Called When_**:
-     - The android is finishing (user presses back or calls finish())
+     - The activity is finishing (user presses back or calls finish())
      - The system destroys the android (e.g., configuration change)
 
    - **_Purpose_**: Cleanup all resources to avoid memory leaks
@@ -75,7 +75,7 @@ An android provides the window in which the app draws its UI. This window typica
 - MainActivity: onStart()
 - MainActivity: onResume()
 - MainActivity: onPause()
-- MainActivity: onStop() - _The android is not destroyed. It just goes to the background (stopped state), and stays in memory (unless Android kills it due to low memory)._
+- MainActivity: onStop() - _The activity is not destroyed. It just goes to the background (stopped state), and stays in memory (unless Android kills it due to low memory)._
 
 
 
@@ -138,7 +138,12 @@ setResult(Activity.RESULT_OK, resultIntent)
 finish()
 
 ```
+
+----
+
 ### [List of ActivityResultContracts](https://developer.android.com/reference/androidx/activity/result/contract/ActivityResultContracts)
+
+----
 
 **Note:**  
 - Each launcher must have a unique name (you cannot define private val activityLauncher multiple times with the same name)
@@ -184,8 +189,8 @@ Android assigns importance levels (often referred to as "priority") to each proc
 >If you have two launcher Activities in your manifest When running the application, It will install two instances of the application(both instances behave the same). If you uninstall any one instance of the app, both instances will be uninstalled.
 
 
-2. What happens to the android when the device is rotated?
-> The android is destroyed and recreated by default. This happens because rotation triggers a configuration change.
+2. What happens to the Activity when the device is rotated?
+> The Activity is destroyed and recreated by default. This happens because rotation triggers a configuration change.
 > 
 > onPause() → onStop() → onDestroy()
 > 
@@ -207,7 +212,7 @@ Android assigns importance levels (often referred to as "priority") to each proc
 >
 > The underlying android is paused, but still partially visible.
 5. What if you call finish() inside onCreate()?
-> The android is created, then immediately destroyed.
+> The activity is created, then immediately destroyed.
 >
 > Lifecycle calls:
 > onCreate() → onDestroy()

@@ -25,6 +25,8 @@ In Kotlin, classes are final by default, meaning they cannot be inherited unless
   - In classic object-oriented programming, inheritance is a powerful but dangerous tool that can lead to a fragile base class problem. This happens when a superclass is modified and those changes inadvertently break child classes. 
   - By making classes final by default, Kotlin helps to prevent such issues, promoting a more predictable and maintainable design.
 
+----
+
 ## Backing field
 
 - Kotlin's properties have implicit support for getters and setters. When you define a custom getter or setter and want to access the value within the setter or getter, you need to use the backing field, which is referenced using the field keyword
@@ -65,6 +67,8 @@ var name: String = "Guest"
     get() = field
 
 ```
+
+----
 
 ## Data class
 In Kotlin, data classes are special classes designed to hold and manage data. They automatically generate useful methods like equals(), hashCode(), toString(), and others based on the properties you define, which makes them ideal for simple value objects.
@@ -163,7 +167,7 @@ fun main() {
 - Can have both abstract (makeSound) and non-abstract (describe) methods.
 - Used when creating a base class for multiple related classes.
 
-
+----
 
 ## Enum class
 An enum class in Kotlin (and Android) is a special class used to define a set of constants. These constants are often related and known at compile time.
@@ -223,6 +227,12 @@ enum class Status : StatusCode {
 **Note:**
 * Enum classes in Kotlin cannot be inherited
 * You can have an enum class implement an interface
+* Cannot create new instances at runtime
+* Fixed set of constants
+* Implicitly extends Enum class, final
+* Private only constructor 
+
+----
 
 ## Value class
 
@@ -232,7 +242,13 @@ Think of it as a way to give semantic meaning to a simple value.
 
 ```kotlin
 @JvmInline
-value class UserId(val id: String)
+value class UserId(val id: String) {
+    init {
+        require(id.isNotEmpty()) { "Invalid user Id" }
+    }
+
+    fun print() = println("Print user ID")
+}
 
 
 val user = UserId("abc123")

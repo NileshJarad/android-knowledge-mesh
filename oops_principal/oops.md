@@ -7,7 +7,7 @@
 ## Encapsulation
 - Encapsulates data and functions together as single unit.
 - Protects the data from unauthorized access and modification.
-- Provides a public interface for interaction while hiding the implementation details.
+- Provides a public interface for interaction.
 - hiding the internal state and requiring all interactions to be performed through an object's methods.
 
 ```kotlin
