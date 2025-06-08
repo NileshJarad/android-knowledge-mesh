@@ -172,6 +172,7 @@ To prevent a lambda from containing non-local returns when you still want to inl
 **What is a Non-Local Return?**
 A non-local return happens when you return from a lambda, and that return is applied to an outer function, not just the lambda itself.
 
+----
 ## Extension Functions
 <p>Extension functions in Kotlin allow you to add new functionality to existing classes without modifying their source code. They are a powerful feature that lets you extend a class with new methods, which can make your code more readable and concise.</p>
 
@@ -229,6 +230,11 @@ fun main() {
 - No real inheritance: Extension functions do not actually modify the class and are not part of the class. They are just syntactic sugar. 
 - Cannot override methods: You cannot override existing methods of a class with extension functions. They cannot interact with private or protected methods or fields of the class.
 
+**Note:**
+- Extension functions in Kotlin are resolved statically, not dynamically.
+- Member wins over extension function if we define extension function same as member function
+
+--- 
 
 ## Infix Function
 In Kotlin, an infix function is a special kind of function that allows you to call it using a more natural, readable syntax without parentheses. Infix functions can only be called on instances of classes and are usually used for operator-like behavior or when you want to create expressive, readable code.

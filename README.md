@@ -179,7 +179,8 @@ and ensure that the information is synchronized objects
     - [Socket connection](android/src/main/kotlin/networking/networking.md#socket-connection)
     - [Server Side Event (SSE)](android/src/main/kotlin/networking/networking.md#server-side-event-sse)
     - [Auth refresh tokens](android/src/main/kotlin/networking/networking.md#auth-refresh-tokens)
-9. Security
+9. [Dependency Injection / Service locator]()
+10. Security
     - Secure Communication
         - HTTPS and SSL/TLS
         - SSL pining
@@ -190,8 +191,8 @@ and ensure that the information is synchronized objects
         - Play Integrity API
     - [Android Keystore System](android/src/main/kotlin/security/android_keystore_system.md)
     - Tap jacking
-10. Android Jetpack
-11. [Compose](android/src/main/kotlin/compose/compose.md)
+11. Android Jetpack
+12. [Compose](android/src/main/kotlin/compose/compose.md)
     - [What are annotations?](android/src/main/kotlin/compose/compose.md#what-is-a-composable-function)
     - [What is a composable function?](android/src/main/kotlin/compose/compose.md#what-is-a-composable-function)
     - [What is Preview?](android/src/main/kotlin/compose/compose.md#what-is-preview)
@@ -214,7 +215,7 @@ and ensure that the information is synchronized objects
     - [How does rememberSaveable internally work?](android/src/main/kotlin/compose/compose.md#how-does-remembersaveable-internally-work)
     - [What are the Side Effects?](android/src/main/kotlin/compose/side_effects.md)
 
-12. Kotlin
+13. Kotlin
     - [Basics](android/src/main/kotlin/kotlin_fundamentals/basics.md)
     - Functions
         - [Higher-order functions](android/src/main/kotlin/kotlin_fundamentals/functions.md#higher-order-function)
@@ -233,8 +234,8 @@ and ensure that the information is synchronized objects
         - [Enum class](android/src/main/kotlin/kotlin_fundamentals/classes.md#enum-class)
         - [value class](android/src/main/kotlin/kotlin_fundamentals/classes.md#value-class)
         -
-13. [Coroutine](android/src/main/kotlin/coroutine/coroutine.md)
-14. Testing
+14. [Coroutine](android/src/main/kotlin/coroutine/coroutine.md)
+15. Testing
     - Unit test
         - Turbine
         - STRIKT
@@ -253,7 +254,7 @@ and ensure that the information is synchronized objects
         - UIAutomator
         - Appium
         - Firebase Test Lab
-15. 
+16. 
 
 #### Awesome Behavioral Interviews - https://github.com/ashishps1/awesome-behavioral-interviews
 
