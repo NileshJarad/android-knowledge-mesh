@@ -138,6 +138,7 @@ fun handleState(state: UiState) {
 - Sealed class restricts inheritance to only the same file.
 - Useful for modeling states in when expressions (ensures exhaustiveness).
 - Cannot be instantiated directly → Only its subclasses can be used.
+- Sealed class can extend another sealed class if and only if it's present in same file, as compiler should know it at compile time
 
 ## Abstract Class (General Inheritance)
 - Allows subclassing from anywhere (no file restriction).

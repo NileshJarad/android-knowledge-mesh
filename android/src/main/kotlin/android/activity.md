@@ -174,14 +174,29 @@ Android assigns importance levels (often referred to as "priority") to each proc
 - When multiple background activities are candidates for killing:
 
   - The system considers memory consumption, process age, and LRU (Least Recently Used) order.
-
   - Long-running background activity may have higher memory usage.
-
   - If both are equally recent in the LRU list, the one consuming more memory is more likely to be killed.
-
   - If all else is equal, the oldest one (least recently used) will be killed first.
 
 ----
+
+### Retain data while Re-Creation of activity
+
+-  ViewModel
+- onSaveInstanceState / saveInstanceState
+    ```kotlin
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putString("key", "value")
+        super.onSaveInstanceState(outState)
+    }
+    
+    override fun onCreate(savedInstanceState: Bundle?) {
+        val value = savedInstanceState?.getString("key")
+    }
+    
+    ```
+- 
+---
 
 
 ## Questions
