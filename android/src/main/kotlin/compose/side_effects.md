@@ -10,7 +10,7 @@ Jetpack Compose provides a set of APIs for handling side effects, and knowing wh
 
 
 ## What is Launched Effect?
-LaunchedEffect is a special composable that allows you to launch coroutines in response to changes in the composition or input keys.
+`LaunchedEffect` is a special composable that allows you to launch coroutines in response to changes in the composition or input keys.
 
 It’s used when you want to perform a side effect (like a network call, delay, animation, etc.) only once or every time a key changes.
 
@@ -59,7 +59,7 @@ fun SaveButton() {
 
 ## What is rememberUpdatedState?
 
-**rememberUpdatedState** is a side-effect utility in Jetpack Compose that lets you "remember" the latest value of a variable across recompositions, especially inside long-lived side-effect scopes like LaunchedEffect, DisposableEffect, or produceState.
+`rememberUpdatedState` is a side-effect utility in Jetpack Compose that lets you "remember" the latest value of a variable across recompositions, especially inside long-lived side-effect scopes like LaunchedEffect, DisposableEffect, or produceState.
 
 It helps prevent stale values being captured by lambdas or coroutines in Compose.
 

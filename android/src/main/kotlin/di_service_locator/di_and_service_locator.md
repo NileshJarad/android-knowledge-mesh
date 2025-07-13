@@ -60,9 +60,70 @@ val viewModel = UserViewModel(FakeUserRepository()) // for test
   - **Global Context Usage:** By default, Koin provides a globally accessible component that acts like a service locator. This allows you to retrieve dependencies from a central registry using `KoinComponent` or `inject` functions.
   - **SL in Android Components:** In Android development, Koin often uses SL internally within components such as Application and Activity for ease of setup. From this point, Koin recommends DI, especially constructor injection
 
-
+------ 
 
 ## Hilt
 
 
+------ 
+
 ## Dagger
+- Dagger is fully static,  compile time dependency injection framework
+- Annotation based DI
+
+### Core Concepts of Dagger 2
+- `@Inject` annotation 
+  - By marking constructors with @Inject, Dagger knows how to build them.
+  ```kotlin
+  class Engine @Inject constructor() {
+      fun start(): String = "Engine started"
+  }
+  
+  class Car @Inject constructor(private val engine: Engine) {
+      fun drive(): String = engine.start()
+  }
+  ```
+
+- `@Module` and `@Provides`
+  - When You Can't Use `@Inject` on Constructor
+  - Some classes like `Retrofit`, `RoomDatabase`, or 3rd-party libraries can’t be modified or don’t have `@Inject` constructors. For such cases, use `@Module`.
+  - Modules are used in Components
+  ```kotlin
+  class Wheels(val size: Int)
+  
+  @Module
+  class WheelsModule {
+      @Provides
+      fun provideWheels(): Wheels {
+          return Wheels(18)
+      }
+  }
+  
+  @Component(modules = [WheelsModule::class])
+  interface CarComponent {
+    fun getWheels(): Wheels
+  }
+  ```
+  
+- `@Component` and how it connects everything
+  - It tells Dagger where and how to inject dependencies.
+  - In below example Dagger will generate code for this interface → `DaggerCarComponent`.
+  ```kotlin
+  @Component
+  interface CarComponent {
+      fun getCar(): Car
+  }
+  
+  fun main() {
+    val carComponent = DaggerCarComponent.create()
+    val car = carComponent.getCar()
+    println(car.drive()) // Output: Engine started
+  }
+  ```
+
+
+
+### Scoping In Dagger 2
+- `@Singleton` Scope
+  - A special scope provided by Dagger. Ensures only one instance is created and shared.
+
