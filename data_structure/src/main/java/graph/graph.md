@@ -15,8 +15,8 @@ Network of node(vertex) and edges(connection)
 - **Example**
   ```agsl
          A --- B
-        /       \
-       D         C
+         |     |
+         D     C
         
     ```
   1. Node A has a degree of 2 because it is connected to nodes B and D.
