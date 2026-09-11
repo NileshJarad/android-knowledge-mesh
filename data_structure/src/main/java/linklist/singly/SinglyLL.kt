@@ -13,6 +13,10 @@ fun main() {
     singlyLL.addNode(25)
     singlyLL.printSinglyLL()
     println()
+    singlyLL.addNodeAtPosition(222,2)
+    println("After insertionad position 2")
+    singlyLL.printSinglyLL()
+    println()
     singlyLL.deleteNode(12)
     println("After deletion 12")
     singlyLL.printSinglyLL()
@@ -47,6 +51,34 @@ class SinglyLL<T> {
         }
     }
 
+
+    /***
+     *
+     */
+    fun addNodeAtPosition(data: T, position: Int) {
+        if (position < 0) {
+            return
+        }
+        if (position == 1 || position == 0) {
+            addFirst(data)
+        }
+
+        var currPos = 1
+        var runner = head
+        // below loop will take runner one step behind the position
+        while (head?.next != null && currPos < position) {
+            runner = runner?.next
+            currPos++
+        }
+
+        // user has provided position that is out of list
+        if(currPos < position - 1){
+            return
+        }
+
+        val insertNode = SinglyLLNode(data, runner?.next)
+        runner?.next = insertNode
+    }
 
     /**
      * Time complexity O(1) as we have to traverse the link list

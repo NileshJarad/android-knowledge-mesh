@@ -20,6 +20,38 @@
 
 ----
 
+### Kotlin code
+
+// Kotlin idiomatic Singleton - object declaration
+object Singleton {
+    init {
+        println("Singleton initialized")
+    }
+    
+    fun doSomething() {
+        println("Doing something")
+    }
+}
+
+// Usage
+fun main() {
+    Singleton.doSomething()  // Access directly via object name
+}
+
+// Alternative: Thread-safe lazy initialization with double-check equivalent
+class KotlinSingleton private constructor() {
+    companion object {
+        @Volatile
+        private var instance: KotlinSingleton? = null
+        
+        fun getInstance(): KotlinSingleton {
+            return instance ?: synchronized(this) {
+                instance ?: KotlinSingleton().also { instance = it }
+            }
+        }
+    }
+}
+
 ### Java code
 
 ```

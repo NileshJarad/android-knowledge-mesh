@@ -1,25 +1,109 @@
-
-
 # Adapter Pattern
 
-* This patterns helps as a connection between two different types of interfaces. 
-  * Most famous example of US and UK sockets is taken here, as the adapter is the one which helps to connect your specific US plug into UK socket(Adaptee).
-    * Example, existing system(Client) might need a function from an older library(Adaptee), here with no code changes from client and adaptee, adapter helps to perform client request by converting it into the available adaptee options
-    * Existing system(No code changes) --> Adapter(Medium) --> Old Code(No Code Changes) 
-  
-    * Usually, there are two types of Adapters
+- **Adapter is a Structural design pattern that lets you attach new behaviors to objects by placing them inside wrapper objects that contain those behaviors.**
+- It is a flexible alternative to subclassing for extending functionality.
 
-### Object Adapters
-  * Adapts the Adaptee by the process of composition.
-  * **Composition** :  Is basically having has-A relationship between two classes. 
-    * House has-A Bathroom, Car has-A Engine
-    * **Class diagram** for Object Adapter
-    * ![Unable to load image](https://www.plantuml.com/plantuml/dpng/TSv12W8n38NXVKxHfIvoWrcCU0Fn0c7cAOMqr2HTgNSNeGCgkCxtVZ9xY4KlIekAUpfgHeqx9SEjmsEtfoTHhW6xo89q5hiYqWyOuyCgBO3trHkMB7hwH5_AKYvDKL33_rMttlHWtcP40q_CFDwb6NNjHLy0) 
-### Class Adapters
-  * Adapts the Adaptee by the process of multiple Inheritance
-  * **Multiple Inheritance**: having multiple is-A relations - [Ref](MultipleInheritance.kt)
-  * not applicable in JAVA
-  **Class diagram** for class Adapter
-  * ![Unable to load image](https://www.plantuml.com/plantuml/dpng/SoWkIImgAStDuKhEIImkLd3EoKpDAwdcKYXABInDBIxHqEIgvOBAXIGMfQUMA62NT4n9B2X9JGN95XUa9cScvWGXAK9LLQIGMb6IcfU2qqYOOJOrkhemFLnSKCKska11Y3kv782c01qF0000)
-  
-More info on Composition vs Inheritance -  [Ref](https://www.adservio.fr/post/composition-vs-inheritance#el1)
+### Use Case
+- Connecting incompatible interfaces (e.g., US to UK plug)
+- Legacy code integration
+- Android: `ArrayAdapter`, `RecyclerView.Adapter`
+
+### Steps to create Adapter
+
+1. **Target** : The interface the client expects.
+2. **Adaptee** : The existing interface that needs adapting.
+3. **Adapter** : Implements Target and wraps Adaptee, delegating calls.
+
+### Pros
+1. Decouples client from the concrete Adaptee.
+2. Enables reusable classes that work with unrelated APIs.
+3. Follows Single Responsibility Principle — adapters focus solely on interface conversion.
+
+### Cons
+1. Can add unnecessary complexity for simple cases.
+2. Requires many small classes.
+
+---
+
+### UML
+
+```
+         +----------------+
+         |   <<Target>>   |
+         |   Target       |
+         |----------------|
+         | +request():    |
+         +----------------+
+                ^
+                |
+      +---------+---+  +----------------+
+      | <<Adaptee>>  |  | <<Adapter>>    |
+      | Adaptee      |  | Adapter        |
+      |----------------|  |----------------|
+      | +specificRequest(): void | +request(): void |
+      +----------------+  +----------------+
+                              |
+                   +---------+-----------+
+                   | <<ConcreteAdapter>> |
+                   | ConcreteAdapter    |
+                   +----------------------+
+```
+
+---
+
+### Kotlin code
+
+Target interface
+
+```kotlin
+interface MediaPlayer {
+    fun play(audioType: String, fileName: String)
+}
+```
+
+Adaptee — Media player with different API
+
+```kotlin
+class AdvancedMediaPlayer {
+    fun playMp3(fileName: String) {
+        println("Playing MP3: $fileName")
+    }
+
+    fun playVlc(fileName: String) {
+        println("Playing VLC: $fileName")
+    }
+}
+```
+
+Adapter — implements Target, wraps Adaptee
+
+```kotlin
+class MediaAdapter(private val advancedPlayer: AdvancedMediaPlayer) : MediaPlayer {
+    override fun play(audioType: String, fileName: String) {
+        when (audioType.lowercase()) {
+            "mp3" -> advancedPlayer.playMp3(fileName)
+            "vlc" -> advancedPlayer.playVlc(fileName)
+            else -> println("Unsupported audio format: $audioType")
+        }
+    }
+}
+```
+
+Client code
+
+```kotlin
+fun main() {
+    val adapter = MediaAdapter(AdvancedMediaPlayer())
+
+    adapter.play("mp3", "song.mp3")
+    adapter.play("vlc", "movie.vlc")
+    adapter.play("invalid", "file.xyz")
+}
+```
+
+---
+
+### Android Use Case
+- **ArrayAdapter**: Converts data objects to View rows.
+- **RecyclerView.Adapter**: Binds data to RecyclerView items.
+- **CursorAdapter**: Maps database cursor results to Views.

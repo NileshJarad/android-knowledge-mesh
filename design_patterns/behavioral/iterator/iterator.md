@@ -23,51 +23,73 @@
 ### kotlin code
 
 Iterator interface
+
 ```kotlin
-interface Iterator<E>{
+interface Iterator<E> {
     fun hasNext() : Boolean
     fun next() : E
 }
 ```
 
 Concrete Iterator
+
 ```kotlin
-private class ListIterator : Iterator<E> {
-    
-    fun hasNext() : Boolean{
-        
+private class ListIterator<T>(private val items: List<T>) : Iterator<T> {
+    private var position = 0
+
+    override fun hasNext() : Boolean {
+        return position < items.size
     }
-    fun next() : E{
-        
+
+    override fun next() : T {
+        val item = items[position]
+        position++
+        return item
     }
 }
 ```
 
 Iterable interface
+
 ```kotlin
-interface Iterable<E>{
+interface Iterable<E> {
     fun iterator() : Iterator<E>
     fun add(item : E)
 }
 ```
 
 Concrete Iterable
+
 ```kotlin
 private class OwnList<E> : Iterable<E> {
-    val list = mutableListOf<E>()
-    fun hasNext() : Boolean{
+    val items = mutableListOf<E>()
+
+    override fun hasNext() : Boolean {
+        return items.isNotEmpty()
     }
-    fun iterator() : Iterator<E>{
-        
+
+    override fun iterator() : Iterator<E> {
+        return ListIterator(items)
     }
-    fun add(item : E){
-        list.add(item)
+
+    override fun add(item : E) {
+        items.add(item)
     }
 }
 ```
 
 Client code
+
 ```kotlin
-val ownList = OwnList<Int>()
-ownList.iterator()
+fun main() {
+    val ownList = OwnList<String>()
+    ownList.add("A")
+    ownList.add("B")
+    ownList.add("C")
+
+    val iterator = ownList.iterator()
+    while (iterator.hasNext()) {
+        println(iterator.next())
+    }
+}
 ```
