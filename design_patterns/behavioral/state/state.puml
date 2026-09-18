@@ -1,0 +1,45 @@
+@startuml State
+interface ConnectionState {
+    +connect()
+    +disconnect()
+    +sendData(data: String)
+}
+
+class NetworkManager {
+    -state: ConnectionState
+    +setState(state: ConnectionState)
+    +connect()
+    +disconnect()
+    +sendData(data: String)
+}
+
+class Disconnected {
+    -manager: NetworkManager
+    +connect()
+    +disconnect()
+    +sendData(data: String)
+}
+
+class Connecting {
+    -manager: NetworkManager
+    +connect()
+    +disconnect()
+    +sendData(data: String)
+}
+
+class Connected {
+    -manager: NetworkManager
+    +connect()
+    +disconnect()
+    +sendData(data: String)
+}
+
+ConnectionState <|.. Disconnected
+ConnectionState <|.. Connecting
+ConnectionState <|.. Connected
+NetworkManager --> ConnectionState
+Disconnected --> NetworkManager
+Connecting --> NetworkManager
+Connected --> NetworkManager
+
+@enduml

@@ -81,3 +81,71 @@ fun main() {
 ### Android Use Case
 - **TextView**: `Typeface` objects are shared across multiple TextViews — Android caches them via `Typeface.create()`.
 - **RecyclerView.Adapter**: Item views are recycled — the view holder is a flyweight that gets rebound with extrinsic data.
+---
+
+### Java code
+
+Flyweight interface
+
+```java
+public interface CharacterStyle {
+    void render(String text, int x, int y, String color);
+}
+```
+
+Concrete Flyweight
+
+```java
+public class TextStyle implements CharacterStyle {
+    private final String fontFamily;
+    private final int fontSize;
+
+    public TextStyle(String fontFamily, int fontSize) {
+        this.fontFamily = fontFamily;
+        this.fontSize = fontSize;
+    }
+
+    @Override
+    public void render(String text, int x, int y, String color) {
+        System.out.println("Rendering '" + text + "' at (" + x + "," + y + ") with " + fontFamily + " " + fontSize + " in " + color);
+    }
+
+    public String getFontFamily() { return fontFamily; }
+    public int getFontSize() { return fontSize; }
+}
+```
+
+Factory
+
+```java
+import java.util.HashMap;
+import java.util.Map;
+
+public class StyleFactory {
+    private final Map<String, CharacterStyle> styles = new HashMap<>();
+
+    public CharacterStyle getStyle(String fontFamily, int fontSize) {
+        String key = fontFamily + "-" + fontSize;
+        return styles.computeIfAbsent(key, k -> new TextStyle(fontFamily, fontSize));
+    }
+}
+```
+
+Client code
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        StyleFactory factory = new StyleFactory();
+
+        CharacterStyle style1 = factory.getStyle("Arial", 12);
+        CharacterStyle style2 = factory.getStyle("Arial", 12);
+        CharacterStyle style3 = factory.getStyle("Courier", 14);
+
+        style1.render("H", 10, 20, "black");
+        style1.render("e", 20, 20, "black");
+        style2.render("i", 30, 20, "red");
+        style3.render("W", 40, 30, "blue");
+    }
+}
+```

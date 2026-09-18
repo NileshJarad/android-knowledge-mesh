@@ -1,0 +1,27 @@
+@startuml TemplateMethod
+abstract class AbstractDataProcessor {
+    +process()
+    +readData(): String
+    +transform(data: String): String
+    +save(data: String)
+    +log(data: String)
+}
+
+class CsvProcessor {
+    +readData(): String
+    +transform(data: String): String
+    +save(data: String)
+    +log(data: String)
+}
+
+class JsonProcessor {
+    +readData(): String
+    +transform(data: String): String
+    +save(data: String)
+    +log(data: String)
+}
+
+AbstractDataProcessor <|.. CsvProcessor
+AbstractDataProcessor <|.. JsonProcessor
+
+@enduml

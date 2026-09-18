@@ -1,0 +1,38 @@
+@startuml Visitor
+interface Animal {
+    +accept(visitor: Visitor)
+}
+
+interface Visitor {
+    +visitDog(dog: Dog)
+    +visitCat(cat: Cat)
+}
+
+class Dog {
+    -name: String
+    +accept(visitor: Visitor)
+}
+
+class Cat {
+    -name: String
+    +accept(visitor: Visitor)
+}
+
+class SoundVisitor {
+    +visitDog(dog: Dog)
+    +visitCat(cat: Cat)
+}
+
+class ActionVisitor {
+    +visitDog(dog: Dog)
+    +visitCat(cat: Cat)
+}
+
+Animal <|.. Dog
+Animal <|.. Cat
+Visitor <|.. SoundVisitor
+Visitor <|.. ActionVisitor
+Dog --> Visitor
+Cat --> Visitor
+
+@enduml

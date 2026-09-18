@@ -1,0 +1,20 @@
+@startuml Proxy
+interface Image {
+    +display()
+}
+
+class RealImage {
+    -filename: String
+    +display()
+}
+
+class ProxyImage {
+    -filename: String
+    -realImage: RealImage?
+    +display()
+}
+
+Image <|.. ProxyImage
+ProxyImage --> RealImage
+
+@enduml

@@ -121,3 +121,110 @@ fun main() {
 - **Activity onSaveInstanceState()**: Restores state after configuration changes.
 - **ViewModel**: Restores state from `SavedStateHandle`.
 - **Game state**: Snapshots before and after actions.
+---
+
+### Java code
+
+Memento class
+
+```java
+public class PlayerState {
+    private final int health;
+    private final int position;
+    private final int score;
+
+    public PlayerState(int health, int position, int score) {
+        this.health = health;
+        this.position = position;
+        this.score = score;
+    }
+
+    public int getHealth() { return health; }
+    public int getPosition() { return position; }
+    public int getScore() { return score; }
+}
+```
+
+Originator
+
+```java
+public class Player {
+    private int health = 100;
+    private int position = 0;
+    private int score = 0;
+
+    public void takeDamage(int damage) {
+        health -= damage;
+        System.out.println("Health reduced to " + health);
+    }
+
+    public void move(int steps) {
+        position += steps;
+        System.out.println("Moved to position " + position);
+    }
+
+    public void addScore(int points) {
+        score += points;
+        System.out.println("Score increased to " + score);
+    }
+
+    public PlayerState createMemento() {
+        return new PlayerState(health, position, score);
+    }
+
+    public void restoreMemento(PlayerState memento) {
+        this.health = memento.getHealth();
+        this.position = memento.getPosition();
+        this.score = memento.getScore();
+        System.out.println("State restored to health=" + health + ", position=" + position + ", score=" + score);
+    }
+
+    public String getCurrentState() {
+        return "health=" + health + ", position=" + position + ", score=" + score;
+    }
+}
+```
+
+Caretaker
+
+```java
+import java.util.ArrayList;
+import java.util.List;
+
+public class GameHistory {
+    private final List<PlayerState> history = new ArrayList<>();
+
+    public void save(PlayerState state) {
+        history.add(state);
+    }
+
+    public PlayerState undo() {
+        if (history.isEmpty()) {
+            throw new IllegalStateException("No state to undo");
+        }
+        return history.remove(history.size() - 1);
+    }
+}
+```
+
+Client code
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        Player player = new Player();
+        GameHistory history = new GameHistory();
+
+        history.save(player.createMemento());
+
+        player.move(10);
+        player.takeDamage(30);
+        player.addScore(50);
+        System.out.println("Current state: " + player.getCurrentState());
+
+        PlayerState previousState = history.undo();
+        player.restoreMemento(previousState);
+        System.out.println("Restored state: " + player.getCurrentState());
+    }
+}
+```

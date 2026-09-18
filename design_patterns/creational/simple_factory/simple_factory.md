@@ -105,7 +105,7 @@ fun main() {
 
 ### Java code
 
-Product
+Product interface
 
 ```java
 public interface Shape {
@@ -147,7 +147,7 @@ public class ShapeFactory {
 }
 ```
 
-Client
+Client code
 
 ```java
 public class Main {
@@ -157,6 +157,9 @@ public class Main {
 
         Shape rectangle = ShapeFactory.createShape("rectangle");
         rectangle.draw();
+
+        Shape square = ShapeFactory.createShape("square");
+        square.draw();
     }
 }
 ```

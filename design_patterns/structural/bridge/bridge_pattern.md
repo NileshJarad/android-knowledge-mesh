@@ -118,3 +118,123 @@ fun main() {
 ### Android Use Case
 - **View system**: Android's `View` class uses bridge-like patterns to separate view logic from rendering.
 - **WindowManager**: Different window implementations across API levels.
+---
+
+### Java code
+
+Implementor interface
+
+```java
+public interface Renderer {
+    void renderCircle(int radius);
+    void renderRectangle(int width, int height);
+}
+```
+
+Concrete Implementors
+
+```java
+public class VectorRenderer implements Renderer {
+    @Override
+    public void renderCircle(int radius) {
+        System.out.println("Vector: Drawing circle with radius " + radius);
+    }
+
+    @Override
+    public void renderRectangle(int width, int height) {
+        System.out.println("Vector: Drawing rectangle " + width + " x " + height);
+    }
+}
+
+public class RasterRenderer implements Renderer {
+    @Override
+    public void renderCircle(int radius) {
+        System.out.println("Raster: Drawing circle with radius " + radius);
+    }
+
+    @Override
+    public void renderRectangle(int width, int height) {
+        System.out.println("Raster: Drawing rectangle " + width + " x " + height);
+    }
+}
+```
+
+Abstraction
+
+```java
+public abstract class Shape {
+    protected Renderer renderer;
+
+    protected Shape(Renderer renderer) {
+        this.renderer = renderer;
+    }
+
+    public abstract void draw();
+    public abstract void resize(float factor);
+}
+```
+
+Refined Abstractions
+
+```java
+public class Circle extends Shape {
+    private int radius;
+
+    public Circle(Renderer renderer, int radius) {
+        super(renderer);
+        this.radius = radius;
+    }
+
+    @Override
+    public void draw() {
+        renderer.renderCircle(radius);
+    }
+
+    @Override
+    public void resize(float factor) {
+        this.radius = (int) (radius * factor);
+    }
+}
+
+public class Rectangle extends Shape {
+    private int width;
+    private int height;
+
+    public Rectangle(Renderer renderer, int width, int height) {
+        super(renderer);
+        this.width = width;
+        this.height = height;
+    }
+
+    @Override
+    public void draw() {
+        renderer.renderRectangle(width, height);
+    }
+
+    @Override
+    public void resize(float factor) {
+        this.width = (int) (width * factor);
+        this.height = (int) (height * factor);
+    }
+}
+```
+
+Client code
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        Renderer vector = new VectorRenderer();
+        Renderer raster = new RasterRenderer();
+
+        Circle circle = new Circle(vector, 5);
+        circle.draw();
+
+        Rectangle rect = new Rectangle(raster, 10, 20);
+        rect.draw();
+
+        rect.resize(2.0f);
+        rect.draw();
+    }
+}
+```

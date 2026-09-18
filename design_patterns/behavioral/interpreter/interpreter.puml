@@ -1,0 +1,43 @@
+@startuml Interpreter
+interface Expression {
+    +interpret(context: Context): Boolean
+}
+
+class Context {
+    -variables: Map<String, Boolean>
+    +assign(varName: String, value: Boolean)
+    +lookup(varName: String): Boolean
+}
+
+class VariableExpression {
+    -name: String
+    +interpret(context: Context): Boolean
+}
+
+class AndExpression {
+    -expr1: Expression
+    -expr2: Expression
+    +interpret(context: Context): Boolean
+}
+
+class OrExpression {
+    -expr1: Expression
+    -expr2: Expression
+    +interpret(context: Context): Boolean
+}
+
+class NotExpression {
+    -expr: Expression
+    +interpret(context: Context): Boolean
+}
+
+Expression <|.. VariableExpression
+Expression <|.. AndExpression
+Expression <|.. OrExpression
+Expression <|.. NotExpression
+VariableExpression --> Context
+AndExpression --> Expression
+OrExpression --> Expression
+NotExpression --> Expression
+
+@enduml

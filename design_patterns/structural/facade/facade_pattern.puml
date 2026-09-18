@@ -1,0 +1,21 @@
+@startuml Facade
+class Catalog {
+    +searchBook(title: String): Boolean
+}
+
+class Lending {
+    +checkOut(bookId: String): Boolean
+    +checkIn(bookId: String)
+}
+
+class LibraryFacade {
+    -catalog: Catalog
+    -lending: Lending
+    +borrowBook(title: String)
+    +returnBook(bookId: String)
+}
+
+LibraryFacade --> Catalog
+LibraryFacade --> Lending
+
+@enduml

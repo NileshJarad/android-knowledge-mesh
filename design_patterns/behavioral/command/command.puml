@@ -1,0 +1,41 @@
+@startuml Command
+interface Command {
+    +execute()
+    +undo()
+}
+
+class TextEditor {
+    -text: String
+    +insert(word: String)
+    +delete(word: String)
+    +getText(): String
+}
+
+class InsertCommand {
+    -editor: TextEditor
+    -word: String
+    +execute()
+    +undo()
+}
+
+class DeleteCommand {
+    -editor: TextEditor
+    -word: String
+    +execute()
+    +undo()
+}
+
+class CommandHistory {
+    -history: List<Command>
+    +push(command: Command)
+    +pop(): Command
+    +undo()
+}
+
+Command <|.. InsertCommand
+Command <|.. DeleteCommand
+InsertCommand --> TextEditor
+DeleteCommand --> TextEditor
+CommandHistory --> Command
+
+@enduml

@@ -130,3 +130,105 @@ Client code
     println("Commercial Plan detail = ${commercialPlan?.getPlanDetails()}")
     println("Domestic Plan detail = ${domesticPlan?.getPlanDetails()}")
 ```
+
+---
+
+### Java code
+
+Product abstract class
+
+```java
+public abstract class Plan {
+    private final float baseRate = 100f;
+
+    public float getPlanDetails() {
+        return baseRate + getRate();
+    }
+
+    protected abstract float getRate();
+}
+```
+
+Concrete Products
+
+```java
+public class DomesticPlan extends Plan {
+    @Override
+    protected float getRate() { return 200f; }
+}
+
+public class CommercialPlan extends Plan {
+    @Override
+    protected float getRate() { return 400f; }
+}
+
+public class InstitutionalPlan extends Plan {
+    @Override
+    protected float getRate() { return 600f; }
+}
+```
+
+Creator interface and concrete creators
+
+```java
+public interface PlanCreator {
+    Plan createPlan();
+}
+
+public class DomesticPlanCreator implements PlanCreator {
+    @Override
+    public Plan createPlan() { return new DomesticPlan(); }
+}
+
+public class CommercialPlanCreator implements PlanCreator {
+    @Override
+    public Plan createPlan() { return new CommercialPlan(); }
+}
+
+public class InstitutionalPlanCreator implements PlanCreator {
+    @Override
+    public Plan createPlan() { return new InstitutionalPlan(); }
+}
+```
+
+Factory utility
+
+```java
+public abstract class PlanFactory {
+    public enum PlansEnum {
+        Domestic, Commercial, Institutional
+    }
+
+    public abstract Plan getPlan(PlansEnum plan);
+}
+
+public class ByTypePlanFactory extends PlanFactory {
+    @Override
+    public Plan getPlan(PlansEnum plan) {
+        switch (plan) {
+            case Domestic: return new DomesticPlanCreator().createPlan();
+            case Commercial: return new CommercialPlanCreator().createPlan();
+            case Institutional: return new InstitutionalPlanCreator().createPlan();
+            default: return null;
+        }
+    }
+}
+```
+
+Client code
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        ByTypePlanFactory planFactory = new ByTypePlanFactory();
+
+        Plan institutionalPlan = planFactory.getPlan(PlanFactory.PlansEnum.Institutional);
+        Plan commercialPlan = planFactory.getPlan(PlanFactory.PlansEnum.Commercial);
+        Plan domesticPlan = planFactory.getPlan(PlanFactory.PlansEnum.Domestic);
+
+        System.out.println("Institutional Plan detail = " + institutionalPlan.getPlanDetails());
+        System.out.println("Commercial Plan detail = " + commercialPlan.getPlanDetails());
+        System.out.println("Domestic Plan detail = " + domesticPlan.getPlanDetails());
+    }
+}
+```

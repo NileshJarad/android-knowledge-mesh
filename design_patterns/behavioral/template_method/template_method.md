@@ -78,3 +78,70 @@ fun main() {
 ### Android Use Case
 - **Activity**: `onCreate` → `setContentView` → `onStart` → `onResume` is a template method.
 - **AsyncTask**: `onPreExecute` → `doBackgroundWork` → `onProgressUpdate` → `onPostExecute`.
+---
+
+### Java code
+
+Abstract Class
+
+```java
+public abstract class AbstractDataProcessor {
+    public void process() {
+        String data = readData();
+        String transformed = transform(data);
+        save(transformed);
+        log(transformed);
+    }
+
+    protected String readData() { return "Raw data from source"; }
+    protected String transform(String data) { return data.toUpperCase(); }
+    protected void save(String data) { System.out.println("Saving: " + data); }
+    protected void log(String data) { System.out.println("Logging: " + data); }
+}
+```
+
+Concrete Classes
+
+```java
+public class CsvProcessor extends AbstractDataProcessor {
+    @Override
+    protected String readData() { return "CSV rows from file"; }
+
+    @Override
+    protected String transform(String data) { return "[CSV] " + data; }
+
+    @Override
+    protected void save(String data) { System.out.println("Saving CSV to DB: " + data); }
+
+    @Override
+    protected void log(String data) { System.out.println("CSV Log: " + data); }
+}
+
+public class JsonProcessor extends AbstractDataProcessor {
+    @Override
+    protected String readData() { return "JSON from API"; }
+
+    @Override
+    protected String transform(String data) { return "{ \"data\": \"" + data + "\" }"; }
+
+    @Override
+    protected void save(String data) { System.out.println("Saving JSON to DB: " + data); }
+
+    @Override
+    protected void log(String data) { System.out.println("JSON Log: " + data); }
+}
+```
+
+Client code
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        AbstractDataProcessor csvProcessor = new CsvProcessor();
+        csvProcessor.process();
+        System.out.println("---");
+        AbstractDataProcessor jsonProcessor = new JsonProcessor();
+        jsonProcessor.process();
+    }
+}
+```

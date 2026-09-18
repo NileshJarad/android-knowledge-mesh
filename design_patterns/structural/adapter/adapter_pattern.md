@@ -107,3 +107,65 @@ fun main() {
 - **ArrayAdapter**: Converts data objects to View rows.
 - **RecyclerView.Adapter**: Binds data to RecyclerView items.
 - **CursorAdapter**: Maps database cursor results to Views.
+---
+
+### Java code
+
+Target interface
+
+```java
+public interface MediaPlayer {
+    void play(String audioType, String fileName);
+}
+```
+
+Adaptee
+
+```java
+public class AdvancedMediaPlayer {
+    public void playMp3(String fileName) {
+        System.out.println("Playing MP3: " + fileName);
+    }
+
+    public void playVlc(String fileName) {
+        System.out.println("Playing VLC: " + fileName);
+    }
+}
+```
+
+Adapter
+
+```java
+public class MediaAdapter implements MediaPlayer {
+    private final AdvancedMediaPlayer advancedPlayer;
+
+    public MediaAdapter(AdvancedMediaPlayer advancedPlayer) {
+        this.advancedPlayer = advancedPlayer;
+    }
+
+    @Override
+    public void play(String audioType, String fileName) {
+        if (audioType.equalsIgnoreCase("mp3")) {
+            advancedPlayer.playMp3(fileName);
+        } else if (audioType.equalsIgnoreCase("vlc")) {
+            advancedPlayer.playVlc(fileName);
+        } else {
+            System.out.println("Unsupported audio format: " + audioType);
+        }
+    }
+}
+```
+
+Client code
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        MediaAdapter adapter = new MediaAdapter(new AdvancedMediaPlayer());
+
+        adapter.play("mp3", "song.mp3");
+        adapter.play("vlc", "movie.vlc");
+        adapter.play("invalid", "file.xyz");
+    }
+}
+```

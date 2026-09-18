@@ -1,0 +1,20 @@
+@startuml Flyweight
+interface CharacterStyle {
+    +render(text: String, x: Int, y: Int, color: String)
+}
+
+class TextStyle {
+    -fontFamily: String
+    -fontSize: Int
+    +render(text: String, x: Int, y: Int, color: String)
+}
+
+class StyleFactory {
+    -styles: MutableMap<String, CharacterStyle>
+    +getStyle(fontFamily: String, fontSize: Int): CharacterStyle
+}
+
+CharacterStyle <|.. TextStyle
+StyleFactory --> CharacterStyle
+
+@enduml

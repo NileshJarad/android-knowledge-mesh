@@ -115,3 +115,119 @@ class ConcreteObserver(private val subject: Subject) : Observer {
 
 ```
 
+
+---
+
+### Java code
+
+Subject interface
+
+```java
+import java.util.ArrayList;
+import java.util.List;
+
+public interface Observer {
+    void update(int value);
+}
+
+public interface Subject {
+    void register(Observer observer);
+    void remove(Observer observer);
+    void notifyObservers();
+}
+```
+
+Concrete Subject
+
+```java
+public class WeatherStation implements Subject {
+    private final List<Observer> observers = new ArrayList<>();
+    private int temperature;
+
+    @Override
+    public void register(Observer observer) {
+        observers.add(observer);
+    }
+
+    @Override
+    public void remove(Observer observer) {
+        observers.remove(observer);
+    }
+
+    @Override
+    public void notifyObservers() {
+        for (Observer observer : observers) {
+            observer.update(temperature);
+        }
+    }
+
+    public void setMeasurements(int temperature) {
+        this.temperature = temperature;
+        System.out.println("WeatherStation: Current temperature is " + temperature);
+        notifyObservers();
+    }
+}
+```
+
+Concrete Observers
+
+```java
+public class CurrentConditionsDisplay implements Observer {
+    private int temperature;
+
+    @Override
+    public void update(int temperature) {
+        this.temperature = temperature;
+        display();
+    }
+
+    public void display() {
+        System.out.println("CurrentConditionsDisplay: " + temperature + "F degrees");
+    }
+}
+
+public class StatisticsDisplay implements Observer {
+    private int temperature;
+    private int minTemperature = Integer.MAX_VALUE;
+    private int maxTemperature = Integer.MIN_VALUE;
+    private int count = 0;
+
+    @Override
+    public void update(int temperature) {
+        this.temperature = temperature;
+        count++;
+        updateMinMax(temperature);
+        display();
+    }
+
+    private void updateMinMax(int temperature) {
+        if (temperature < minTemperature) minTemperature = temperature;
+        if (temperature > maxTemperature) maxTemperature = temperature;
+    }
+
+    public void display() {
+        System.out.println("StatisticsDisplay: " + temperature
+                + "F (min: " + minTemperature + ", max: " + maxTemperature + ")");
+    }
+}
+```
+
+Client code
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        WeatherStation station = new WeatherStation();
+
+        Observer currentDisplay = new CurrentConditionsDisplay();
+        Observer statisticsDisplay = new StatisticsDisplay();
+
+        station.register(currentDisplay);
+        station.register(statisticsDisplay);
+
+        station.setMeasurements(80);
+        station.setMeasurements(82);
+        station.setMeasurements(78);
+    }
+}
+```

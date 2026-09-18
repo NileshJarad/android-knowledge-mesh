@@ -94,6 +94,90 @@ fun main() {
 }
 ```
 
+### Java code
+
+Handler abstract class
+
+```java
+abstract class Handler {
+    private Handler nextHandler;
+
+    public Handler setNext(Handler handler) {
+        this.nextHandler = handler;
+        return handler;
+    }
+
+    public boolean handle(Request request) {
+        if (canHandle(request)) {
+            process(request);
+            return true;
+        }
+        return nextHandler != null && nextHandler.handle(request);
+    }
+
+    abstract boolean canHandle(Request request);
+    abstract void process(Request request);
+}
+```
+
+Concrete Handlers
+
+```java
+class DebugHandler extends Handler {
+    @Override
+    boolean canHandle(Request request) { return request.level.equals("DEBUG"); }
+    @Override
+    void process(Request request) { System.out.println("DEBUG: " + request.message); }
+}
+
+class InfoHandler extends Handler {
+    @Override
+    boolean canHandle(Request request) { return request.level.equals("INFO"); }
+    @Override
+    void process(Request request) { System.out.println("INFO: " + request.message); }
+}
+
+class ErrorHandler extends Handler {
+    @Override
+    boolean canHandle(Request request) { return request.level.equals("ERROR"); }
+    @Override
+    void process(Request request) { System.out.println("ERROR: " + request.message); }
+}
+```
+
+Request class
+
+```java
+class Request {
+    final String level;
+    final String message;
+
+    Request(String level, String message) {
+        this.level = level;
+        this.message = message;
+    }
+}
+```
+
+Client code
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        Handler debugHandler = new DebugHandler();
+        Handler infoHandler = new InfoHandler();
+        Handler errorHandler = new ErrorHandler();
+
+        // Build the chain
+        debugHandler.setNext(infoHandler).setNext(errorHandler);
+
+        debugHandler.handle(new Request("DEBUG", "Debug message"));
+        debugHandler.handle(new Request("INFO", "Info message"));
+        debugHandler.handle(new Request("ERROR", "Error message"));
+    }
+}
+```
+
 ---
 
 ### Android Use Case

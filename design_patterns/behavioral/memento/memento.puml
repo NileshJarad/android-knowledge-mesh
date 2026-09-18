@@ -1,0 +1,32 @@
+@startuml Memento
+class PlayerState {
+    -health: Int
+    -position: Int
+    -score: Int
+    +getHealth(): Int
+    +getPosition(): Int
+    +getScore(): Int
+}
+
+class Player {
+    -health: Int
+    -position: Int
+    -score: Int
+    +takeDamage(damage: Int)
+    +move(steps: Int)
+    +addScore(points: Int)
+    +createMemento(): PlayerState
+    +restoreMemento(memento: PlayerState)
+    +getCurrentState(): String
+}
+
+class GameHistory {
+    -history: List<PlayerState>
+    +save(state: PlayerState)
+    +undo(): PlayerState
+}
+
+Player --> PlayerState
+GameHistory --> PlayerState
+
+@enduml

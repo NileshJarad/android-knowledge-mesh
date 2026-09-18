@@ -140,3 +140,108 @@ client
     val gardenWithGardenHouse = gardenWithGarageHouseBuilder.getResult()
     println("Garden with garage House  = $gardenWithGardenHouse")
 ```
+---
+
+### Java code
+
+Builder interface
+
+```java
+public interface HouseBuilder {
+    void buildWalls(int numWalls);
+    void buildDoor(int numDoors);
+    void buildWindows(int numWindows);
+    void buildGarden();
+    void buildGarage();
+    void buildSteps(int numSteps);
+    House getResult();
+}
+```
+
+Concrete Builder
+
+```java
+public class MyHouseBuilder implements HouseBuilder {
+    private int walls = 0;
+    private int doors = 0;
+    private int windows = 0;
+    private boolean garden = false;
+    private boolean garage = false;
+    private int steps = 0;
+
+    @Override
+    public void buildWalls(int numWalls) { this.walls = numWalls; }
+    @Override
+    public void buildDoor(int numDoors) { this.doors = numDoors; }
+    @Override
+    public void buildWindows(int numWindows) { this.windows = numWindows; }
+    @Override
+    public void buildGarden() { this.garden = true; }
+    @Override
+    public void buildGarage() { this.garage = true; }
+    @Override
+    public void buildSteps(int numSteps) { this.steps = numSteps; }
+
+    @Override
+    public House getResult() {
+        return new House(walls, doors, windows, garden, garage, steps);
+    }
+}
+```
+
+Product
+
+```java
+public class House {
+    private final int walls;
+    private final int doors;
+    private final int windows;
+    private final boolean garden;
+    private final boolean garage;
+    private final int steps;
+
+    public House(int walls, int doors, int windows, boolean garden, boolean garage, int steps) {
+        this.walls = walls;
+        this.doors = doors;
+        this.windows = windows;
+        this.garden = garden;
+        this.garage = garage;
+        this.steps = steps;
+    }
+
+    @Override
+    public String toString() {
+        return "House(walls=" + walls + ", doors=" + doors + ", windows=" + windows
+                + ", garden=" + garden + ", garage=" + garage + ", steps=" + steps + ")";
+    }
+}
+```
+
+Client code
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        MyHouseBuilder gardenHouseBuilder = new MyHouseBuilder();
+        gardenHouseBuilder.buildDoor(2);
+        gardenHouseBuilder.buildGarden();
+        gardenHouseBuilder.buildWalls(4);
+        gardenHouseBuilder.buildSteps(9);
+        gardenHouseBuilder.buildWindows(4);
+
+        House gardenHouse = gardenHouseBuilder.getResult();
+        System.out.println("Garden House = " + gardenHouse);
+
+        MyHouseBuilder gardenWithGarageHouseBuilder = new MyHouseBuilder();
+        gardenWithGarageHouseBuilder.buildDoor(2);
+        gardenWithGarageHouseBuilder.buildGarden();
+        gardenWithGarageHouseBuilder.buildGarage();
+        gardenWithGarageHouseBuilder.buildWalls(4);
+        gardenWithGarageHouseBuilder.buildSteps(25);
+        gardenWithGarageHouseBuilder.buildWindows(4);
+
+        House gardenWithGarageHouse = gardenWithGarageHouseBuilder.getResult();
+        System.out.println("Garden with garage House = " + gardenWithGarageHouse);
+    }
+}
+```

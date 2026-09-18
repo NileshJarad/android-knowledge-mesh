@@ -1,0 +1,40 @@
+@startuml Builder
+abstract class Builder {
+    +buildWalls(numWalls: Int)
+    +buildDoor(numDoors: Int)
+    +buildWindows(numWindows: Int)
+    +buildGarden()
+    +buildGarage()
+    +buildSteps(numSteps: Int)
+    +getResult(): House
+}
+
+class MyHouseBuilder {
+    -walls: Int
+    -doors: Int
+    -windows: Int
+    -garden: Boolean
+    -garage: Boolean
+    -steps: Int
+    +buildWalls(numWalls: Int)
+    +buildDoor(numDoors: Int)
+    +buildWindows(numWindows: Int)
+    +buildGarden()
+    +buildGarage()
+    +buildSteps(numSteps: Int)
+    +getResult(): House
+}
+
+class House {
+    -walls: Int
+    -doors: Int
+    -windows: Int
+    -garden: Boolean
+    -garage: Boolean
+    -steps: Int
+}
+
+Builder <|.. MyHouseBuilder
+MyHouseBuilder --> House
+
+@enduml

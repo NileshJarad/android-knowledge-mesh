@@ -124,6 +124,121 @@ fun main() {
 }
 ```
 
+### Java code
+
+Command interface
+
+```java
+public interface Command {
+    void execute();
+    void undo();
+}
+```
+
+Receiver — Text Editor
+
+```java
+public class TextEditor {
+    private String text = "";
+
+    public void insert(String word) {
+        text += word;
+        System.out.println("Inserted: " + word);
+    }
+
+    public void delete(String word) {
+        text = text.replaceLast(word, "");
+        System.out.println("Deleted: " + word);
+    }
+
+    public String getText() { return text; }
+}
+```
+
+Concrete Commands
+
+```java
+public class InsertCommand implements Command {
+    private final TextEditor editor;
+    private final String word;
+
+    public InsertCommand(TextEditor editor, String word) {
+        this.editor = editor;
+        this.word = word;
+    }
+
+    @Override
+    public void execute() { editor.insert(word); }
+    @Override
+    public void undo() { editor.delete(word); }
+}
+
+public class DeleteCommand implements Command {
+    private final TextEditor editor;
+    private final String word;
+
+    public DeleteCommand(TextEditor editor, String word) {
+        this.editor = editor;
+        this.word = word;
+    }
+
+    @Override
+    public void execute() { editor.delete(word); }
+    @Override
+    public void undo() { editor.insert(word); }
+}
+```
+
+Invoker — Command History
+
+```java
+import java.util.ArrayList;
+import java.util.List;
+
+public class CommandHistory {
+    private final List<Command> history = new ArrayList<>();
+
+    public void push(Command command) {
+        history.add(command);
+    }
+
+    public Command pop() {
+        return history.remove(history.size() - 1);
+    }
+
+    public void undo() {
+        if (!history.isEmpty()) {
+            pop().undo();
+        }
+    }
+}
+```
+
+Client code
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        TextEditor editor = new TextEditor();
+        CommandHistory history = new CommandHistory();
+
+        Command insert = new InsertCommand(editor, "Hello");
+        insert.execute();
+        history.push(insert);
+
+        Command insert2 = new InsertCommand(editor, " World");
+        insert2.execute();
+        history.push(insert2);
+
+        System.out.println("Current text: " + editor.getText());
+
+        history.undo();
+        history.undo();
+        System.out.println("After undo: " + editor.getText());
+    }
+}
+```
+
 ---
 
 ### Android Use Case

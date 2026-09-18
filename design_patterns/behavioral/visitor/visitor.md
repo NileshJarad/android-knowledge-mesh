@@ -110,3 +110,105 @@ fun main() {
 - **ViewGroup traversal**: `ViewGroup` visits each child.
 - **AccessibilityNodeProvider**: Visits UI nodes to extract text/content descriptions.
 - **Data binding**: Binding expressions visit model properties.
+---
+
+### Java code
+
+Element interface
+
+```java
+public interface Animal {
+    void accept(Visitor visitor);
+}
+```
+
+Concrete Elements
+
+```java
+public class Dog implements Animal {
+    private final String name;
+
+    public Dog(String name) { this.name = name; }
+
+    public String getName() { return name; }
+
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visitDog(this);
+    }
+}
+
+public class Cat implements Animal {
+    private final String name;
+
+    public Cat(String name) { this.name = name; }
+
+    public String getName() { return name; }
+
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visitCat(this);
+    }
+}
+```
+
+Visitor interface
+
+```java
+public interface Visitor {
+    void visitDog(Dog dog);
+    void visitCat(Cat cat);
+}
+```
+
+Concrete Visitors
+
+```java
+public class SoundVisitor implements Visitor {
+    @Override
+    public void visitDog(Dog dog) {
+        System.out.println(dog.getName() + " says Woof!");
+    }
+
+    @Override
+    public void visitCat(Cat cat) {
+        System.out.println(cat.getName() + " says Meow!");
+    }
+}
+
+public class ActionVisitor implements Visitor {
+    @Override
+    public void visitDog(Dog dog) {
+        System.out.println(dog.getName() + " is fetching the ball");
+    }
+
+    @Override
+    public void visitCat(Cat cat) {
+        System.out.println(cat.getName() + " is catching a mouse");
+    }
+}
+```
+
+Client code
+
+```java
+import java.util.Arrays;
+import java.util.List;
+
+public class Main {
+    public static void main(String[] args) {
+        List<Animal> animals = Arrays.asList(new Dog("Buddy"), new Cat("Whiskers"), new Dog("Max"));
+
+        Visitor soundVisitor = new SoundVisitor();
+        Visitor actionVisitor = new ActionVisitor();
+
+        for (Animal animal : animals) {
+            animal.accept(soundVisitor);
+        }
+        System.out.println("---");
+        for (Animal animal : animals) {
+            animal.accept(actionVisitor);
+        }
+    }
+}
+```

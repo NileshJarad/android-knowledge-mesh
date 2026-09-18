@@ -1,0 +1,42 @@
+@startuml Decorator
+interface Coffee {
+    +cost(): Int
+    +description(): String
+}
+
+class SimpleCoffee {
+    +cost(): Int
+    +description(): String
+}
+
+abstract class CoffeeDecorator {
+    -coffee: Coffee
+    +cost(): Int
+    +description(): String
+}
+
+class Milk {
+    +cost(): Int
+    +description(): String
+}
+
+class Sugar {
+    +cost(): Int
+    +description(): String
+}
+
+class WhippedCream {
+    +cost(): Int
+    +description(): String
+}
+
+Coffee <|.. SimpleCoffee
+Coffee <|.. CoffeeDecorator
+CoffeeDecorator <|.. Milk
+CoffeeDecorator <|.. Sugar
+CoffeeDecorator <|.. WhippedCream
+Milk --> Coffee
+Sugar --> Coffee
+WhippedCream --> Coffee
+
+@enduml

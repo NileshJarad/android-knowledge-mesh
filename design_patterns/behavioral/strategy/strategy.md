@@ -104,3 +104,113 @@ class Client : Base() {
     }
 }
 ```
+---
+
+### Java code
+
+Strategy interface
+
+```java
+public interface PaymentStrategy {
+    void pay(double amount);
+}
+```
+
+Concrete Strategies
+
+```java
+public class CreditCardStrategy implements PaymentStrategy {
+    private final String name;
+    private final String cardNumber;
+    private final String cvv;
+    private final String dateOfExpiry;
+
+    public CreditCardStrategy(String name, String cardNumber, String cvv, String dateOfExpiry) {
+        this.name = name;
+        this.cardNumber = cardNumber;
+        this.cvv = cvv;
+        this.dateOfExpiry = dateOfExpiry;
+    }
+
+    @Override
+    public void pay(double amount) {
+        System.out.println("Processing credit card payment of $" + amount);
+        System.out.println("Name: " + name);
+        System.out.println("Card: " + cardNumber);
+        // Payment logic...
+    }
+}
+
+public class PayPalStrategy implements PaymentStrategy {
+    private final String emailId;
+    private final String password;
+
+    public PayPalStrategy(String emailId, String password) {
+        this.emailId = emailId;
+        this.password = password;
+    }
+
+    @Override
+    public void pay(double amount) {
+        System.out.println("Processing PayPal payment of $" + amount);
+        System.out.println("Email: " + emailId);
+        // Payment logic...
+    }
+}
+
+public class ApplePayStrategy implements PaymentStrategy {
+    private final String deviceToken;
+
+    public ApplePayStrategy(String deviceToken) {
+        this.deviceToken = deviceToken;
+    }
+
+    @Override
+    public void pay(double amount) {
+        System.out.println("Processing Apple Pay payment of $" + amount);
+        System.out.println("Device token: " + deviceToken);
+        // Payment logic...
+    }
+}
+```
+
+Context
+
+```java
+import java.util.Optional;
+
+public class Base {
+    private PaymentStrategy strategy;
+
+    public void setStrategy(PaymentStrategy strategy) {
+        this.strategy = strategy;
+    }
+
+    public void doPayment(double amount) {
+        if (strategy != null) {
+            strategy.pay(amount);
+        } else {
+            System.out.println("No strategy set!");
+        }
+    }
+}
+```
+
+Client code
+
+```java
+public class Client {
+    public static void main(String[] args) {
+        Base paymentProcessor = new Base();
+
+        paymentProcessor.setStrategy(new CreditCardStrategy("John Doe", "1234-5678-9012-3456", "123", "12/30"));
+        paymentProcessor.doPayment(40.0);
+
+        paymentProcessor.setStrategy(new PayPalStrategy("john@example.com", "password123"));
+        paymentProcessor.doPayment(25.0);
+
+        paymentProcessor.setStrategy(new ApplePayStrategy("device-token-abc"));
+        paymentProcessor.doPayment(30.0);
+    }
+}
+```

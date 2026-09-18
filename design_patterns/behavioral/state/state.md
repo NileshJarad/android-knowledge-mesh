@@ -111,3 +111,124 @@ fun main() {
 - **Activity lifecycle**: `onCreate`, `onStart`, `onResume`, `onPause`, `onStop`, `onDestroy` are state transitions.
 - **Media player**: Idle → Prepared → Playing → Paused → Stopped.
 - **Bluetooth**: Off → Scanning → Connected → Disconnected.
+---
+
+### Java code
+
+State interface
+
+```java
+public interface ConnectionState {
+    void connect();
+    void disconnect();
+    void sendData(String data);
+}
+```
+
+Context
+
+```java
+public class NetworkManager {
+    private ConnectionState state = new Disconnected(this);
+
+    public void setState(ConnectionState state) {
+        this.state = state;
+    }
+
+    public void connect() { state.connect(); }
+    public void disconnect() { state.disconnect(); }
+    public void sendData(String data) { state.sendData(data); }
+}
+```
+
+Concrete States
+
+```java
+public class Disconnected implements ConnectionState {
+    private final NetworkManager manager;
+
+    public Disconnected(NetworkManager manager) {
+        this.manager = manager;
+    }
+
+    @Override
+    public void connect() {
+        System.out.println("Connecting...");
+        manager.setState(new Connecting(manager));
+    }
+
+    @Override
+    public void disconnect() {
+        System.out.println("Already disconnected");
+    }
+
+    @Override
+    public void sendData(String data) {
+        System.out.println("Cannot send data while disconnected");
+    }
+}
+
+public class Connecting implements ConnectionState {
+    private final NetworkManager manager;
+
+    public Connecting(NetworkManager manager) {
+        this.manager = manager;
+    }
+
+    @Override
+    public void connect() {
+        System.out.println("Already connecting");
+    }
+
+    @Override
+    public void disconnect() {
+        System.out.println("Connection cancelled");
+        manager.setState(new Disconnected(manager));
+    }
+
+    @Override
+    public void sendData(String data) {
+        System.out.println("Cannot send data while connecting");
+    }
+}
+
+public class Connected implements ConnectionState {
+    private final NetworkManager manager;
+
+    public Connected(NetworkManager manager) {
+        this.manager = manager;
+    }
+
+    @Override
+    public void connect() {
+        System.out.println("Already connected");
+    }
+
+    @Override
+    public void disconnect() {
+        System.out.println("Disconnecting...");
+        manager.setState(new Disconnected(manager));
+    }
+
+    @Override
+    public void sendData(String data) {
+        System.out.println("Sending data: " + data);
+    }
+}
+```
+
+Client code
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        NetworkManager manager = new NetworkManager();
+
+        manager.connect();
+        manager.connect();
+        manager.sendData("Hello");
+        manager.disconnect();
+        manager.sendData("Bye");
+    }
+}
+```

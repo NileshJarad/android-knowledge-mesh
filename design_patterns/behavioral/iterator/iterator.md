@@ -93,3 +93,91 @@ fun main() {
     }
 }
 ```
+
+---
+
+### Java code
+
+Iterator interface
+
+```java
+public interface Iterator<E> {
+    boolean hasNext();
+    E next();
+}
+```
+
+Concrete Iterator
+
+```java
+import java.util.List;
+
+public class ListIterator<T> implements Iterator<T> {
+    private final List<T> items;
+    private int position = 0;
+
+    public ListIterator(List<T> items) {
+        this.items = items;
+    }
+
+    @Override
+    public boolean hasNext() {
+        return position < items.size();
+    }
+
+    @Override
+    public T next() {
+        T item = items.get(position);
+        position++;
+        return item;
+    }
+}
+```
+
+Iterable interface
+
+```java
+public interface Iterable<E> {
+    Iterator<E> iterator();
+    void add(E item);
+}
+```
+
+Concrete Iterable
+
+```java
+import java.util.ArrayList;
+import java.util.List;
+
+public class OwnList<E> implements Iterable<E> {
+    private final List<E> items = new ArrayList<>();
+
+    @Override
+    public Iterator<E> iterator() {
+        return new ListIterator<>(items);
+    }
+
+    @Override
+    public void add(E item) {
+        items.add(item);
+    }
+}
+```
+
+Client code
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        OwnList<String> ownList = new OwnList<>();
+        ownList.add("A");
+        ownList.add("B");
+        ownList.add("C");
+
+        Iterator<String> iterator = ownList.iterator();
+        while (iterator.hasNext()) {
+            System.out.println(iterator.next());
+        }
+    }
+}
+```

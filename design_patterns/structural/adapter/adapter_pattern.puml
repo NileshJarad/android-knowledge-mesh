@@ -1,0 +1,19 @@
+@startuml Adapter
+interface MediaPlayer {
+    +play(audioType: String, fileName: String)
+}
+
+class AdvancedMediaPlayer {
+    +playMp3(fileName: String)
+    +playVlc(fileName: String)
+}
+
+class MediaAdapter {
+    -advancedPlayer: AdvancedMediaPlayer
+    +play(audioType: String, fileName: String)
+}
+
+MediaPlayer <|.. MediaAdapter
+MediaAdapter --> AdvancedMediaPlayer
+
+@enduml

@@ -1,0 +1,44 @@
+@startuml Bridge
+interface Renderer {
+    +renderCircle(radius: Int)
+    +renderRectangle(width: Int, height: Int)
+}
+
+class VectorRenderer {
+    +renderCircle(radius: Int)
+    +renderRectangle(width: Int, height: Int)
+}
+
+class RasterRenderer {
+    +renderCircle(radius: Int)
+    +renderRectangle(width: Int, height: Int)
+}
+
+abstract class Shape {
+    -renderer: Renderer
+    +draw()
+    +resize(factor: Float)
+}
+
+class Circle {
+    -radius: Int
+    +draw()
+    +resize(factor: Float)
+}
+
+class Rectangle {
+    -width: Int
+    -height: Int
+    +draw()
+    +resize(factor: Float)
+}
+
+Renderer <|.. VectorRenderer
+Renderer <|.. RasterRenderer
+Shape <|.. Circle
+Shape <|.. Rectangle
+Shape --> Renderer
+Circle --> Renderer
+Rectangle --> Renderer
+
+@enduml

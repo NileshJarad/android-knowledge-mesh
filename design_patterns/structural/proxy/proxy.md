@@ -107,3 +107,94 @@ fun main() {
 - **Room DAO**: DAO methods act as proxies that delegate to SQLite.
 - **Glide**: Loads images lazily with caching proxy.
 - **Binder**: Android's IPC mechanism uses a proxy on the client side.
+---
+
+### Java code
+
+Subject interface
+
+```java
+public interface Image {
+    void display();
+}
+```
+
+Real Subject
+
+```java
+public class RealImage implements Image {
+    private final String filename;
+
+    public RealImage(String filename) {
+        this.filename = filename;
+        System.out.println("Loading image from disk: " + filename);
+    }
+
+    @Override
+    public void display() {
+        System.out.println("Displaying image: " + filename);
+    }
+}
+```
+
+Proxy (Lazy Loading)
+
+```java
+public class ProxyImage implements Image {
+    private final String filename;
+    private RealImage realImage;
+
+    public ProxyImage(String filename) {
+        this.filename = filename;
+    }
+
+    @Override
+    public void display() {
+        if (realImage == null) {
+            realImage = new RealImage(filename);
+        }
+        realImage.display();
+    }
+}
+```
+
+Protection Proxy
+
+```java
+public class PermissionProxyImage implements Image {
+    private final String filename;
+    private final String userRole;
+    private RealImage realImage;
+
+    public PermissionProxyImage(String filename, String userRole) {
+        this.filename = filename;
+        this.userRole = userRole;
+    }
+
+    @Override
+    public void display() {
+        if (!userRole.equals("admin")) {
+            System.out.println("Access denied: " + userRole + " cannot view " + filename);
+            return;
+        }
+        if (realImage == null) {
+            realImage = new RealImage(filename);
+        }
+        realImage.display();
+    }
+}
+```
+
+Client code
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        Image image = new ProxyImage("photo.jpg");
+
+        System.out.println("Image not yet loaded");
+        image.display();  // Loads and displays
+        image.display();  // Already loaded
+    }
+}
+```

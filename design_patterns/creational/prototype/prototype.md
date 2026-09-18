@@ -68,3 +68,57 @@ Client code
     println("toyDuck  = $toyDuck")
     println("toyDuckClone  = $toyDuckClone")
 ```
+---
+
+### Java code
+
+Prototype interface
+
+```java
+public interface Duck {
+    Duck clone();
+}
+```
+
+Concrete Prototype
+
+```java
+public class ToyDuck implements Duck {
+    private String color;
+    private String mfDate;
+
+    public void setColor(String color) { this.color = color; }
+    public void setMfDate(String mfDate) { this.mfDate = mfDate; }
+
+    @Override
+    public Duck clone() {
+        ToyDuck cloned = new ToyDuck();
+        cloned.color = this.color;
+        cloned.mfDate = this.mfDate;
+        return cloned;
+    }
+
+    @Override
+    public String toString() {
+        return "ToyDuck(color='" + color + "', mfDate='" + mfDate + "')";
+    }
+}
+```
+
+Client code
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        ToyDuck toyDuck = new ToyDuck();
+        toyDuck.setColor("red");
+        toyDuck.setMfDate("12/3/2023");
+
+        ToyDuck toyDuckClone = (ToyDuck) toyDuck.clone();
+        toyDuckClone.setColor("redCloned");
+
+        System.out.println("toyDuck = " + toyDuck);
+        System.out.println("toyDuckClone = " + toyDuckClone);
+    }
+}
+```

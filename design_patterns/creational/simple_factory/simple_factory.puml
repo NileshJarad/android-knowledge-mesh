@@ -1,0 +1,27 @@
+@startuml SimpleFactory
+interface Shape {
+    +draw()
+}
+
+class Circle {
+    +draw()
+}
+
+class Rectangle {
+    +draw()
+}
+
+class Square {
+    +draw()
+}
+
+class ShapeFactory {
+    +createShape(type: String): Shape
+}
+
+Shape <|.. Circle
+Shape <|.. Rectangle
+Shape <|.. Square
+ShapeFactory --> Shape
+
+@enduml

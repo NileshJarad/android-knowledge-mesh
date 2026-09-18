@@ -1,0 +1,29 @@
+@startuml Mediator
+interface ChatMediator {
+    +sendMessage(message: String, colleague: Colleague)
+    +register(colleague: Colleague)
+}
+
+interface Colleague {
+    +receive(message: String)
+}
+
+class ChatRoom {
+    -colleagues: List<Colleague>
+    +register(colleague: Colleague)
+    +sendMessage(message: String, colleague: Colleague)
+}
+
+class User {
+    -name: String
+    -mediator: ChatMediator
+    +send(message: String)
+    +receive(message: String)
+}
+
+ChatMediator <|.. ChatRoom
+Colleague <|.. User
+ChatRoom --> Colleague
+User --> ChatMediator
+
+@enduml

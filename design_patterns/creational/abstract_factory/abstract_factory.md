@@ -143,3 +143,85 @@ class Pen {
 
 }
 ```
+
+---
+
+### Java code
+
+Product 1
+
+```java
+public interface Refill {
+    String color();
+}
+
+public class BlueRefill implements Refill {
+    @Override
+    public String color() { return "Blue"; }
+}
+
+public class BlackRefill implements Refill {
+    @Override
+    public String color() { return "Black"; }
+}
+```
+
+Product 2
+
+```java
+public interface Body {
+    String metal();
+}
+
+public class GelPenBody implements Body {
+    @Override
+    public String metal() { return "Steel"; }
+}
+
+public class BallPenBody implements Body {
+    @Override
+    public String metal() { return "Plastic"; }
+}
+```
+
+Abstract Factory
+
+```java
+public interface PenFactory {
+    Body getBody();
+    Refill getRefill();
+}
+
+public class BlueGelPenFactory implements PenFactory {
+    @Override
+    public Body getBody() { return new GelPenBody(); }
+    @Override
+    public Refill getRefill() { return new BlueRefill(); }
+}
+
+public class BlackBallPenFactory implements PenFactory {
+    @Override
+    public Body getBody() { return new BallPenBody(); }
+    @Override
+    public Refill getRefill() { return new BlackRefill(); }
+}
+```
+
+Client code
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        PenFactory penFactory = new BlueGelPenFactory();
+        Pen pen = new Pen();
+        pen.write(penFactory);
+    }
+}
+
+class Pen {
+    public void write(PenFactory factory) {
+        System.out.println("Writing using " + factory.getRefill().color()
+                + " ink and " + factory.getBody().metal() + " body");
+    }
+}
+```

@@ -1,0 +1,23 @@
+@startuml Composite
+interface FileSystemComponent {
+    +printStructure(indent: String)
+}
+
+class File {
+    -name: String
+    +printStructure(indent: String)
+}
+
+class Directory {
+    -name: String
+    -children: MutableList<FileSystemComponent>
+    +add(component: FileSystemComponent)
+    +remove(component: FileSystemComponent)
+    +printStructure(indent: String)
+}
+
+FileSystemComponent <|.. File
+FileSystemComponent <|.. Directory
+Directory --> FileSystemComponent
+
+@enduml

@@ -97,3 +97,90 @@ fun main() {
 - **FragmentManager**: Fragments communicate through the fragment manager, not directly.
 - **ViewModel**: Shared ViewModel mediates between fragments in a navigation graph.
 - **RecyclerView.Adapter**: Coordinates between ViewHolder and data source.
+---
+
+### Java code
+
+Mediator interface
+
+```java
+public interface ChatMediator {
+    void sendMessage(String message, Colleague colleague);
+    void register(Colleague colleague);
+}
+```
+
+Colleague interface
+
+```java
+public interface Colleague {
+    void receive(String message);
+}
+```
+
+Chat Room (Concrete Mediator)
+
+```java
+import java.util.ArrayList;
+import java.util.List;
+
+public class ChatRoom implements ChatMediator {
+    private final List<Colleague> colleagues = new ArrayList<>();
+
+    @Override
+    public void register(Colleague colleague) {
+        colleagues.add(colleague);
+    }
+
+    @Override
+    public void sendMessage(String message, Colleague colleague) {
+        for (Colleague c : colleagues) {
+            if (c != colleague) {
+                c.receive(message);
+            }
+        }
+    }
+}
+```
+
+User (Concrete Colleague)
+
+```java
+public class User implements Colleague {
+    private final String name;
+    private final ChatMediator mediator;
+
+    public User(String name, ChatMediator mediator) {
+        this.name = name;
+        this.mediator = mediator;
+        mediator.register(this);
+    }
+
+    public void send(String message) {
+        System.out.println(name + " sends: " + message);
+        mediator.sendMessage(message, this);
+    }
+
+    @Override
+    public void receive(String message) {
+        System.out.println(name + " receives: " + message);
+    }
+}
+```
+
+Client code
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        ChatRoom chatRoom = new ChatRoom();
+
+        User alice = new User("Alice", chatRoom);
+        User bob = new User("Bob", chatRoom);
+        User charlie = new User("Charlie", chatRoom);
+
+        alice.send("Hello everyone!");
+        bob.send("Hi Alice!");
+    }
+}
+```

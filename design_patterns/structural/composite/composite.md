@@ -133,3 +133,85 @@ fun main() {
 ### Android Use Case
 - **ViewGroup/View**: Android's `ViewGroup` (composite) holds child `View` objects (leaves). Both extend `View`. Methods like `draw()`, `layout()` work recursively.
 - **Menu**: `Menu` contains `MenuItem` and submenus — classic Composite.
+---
+
+### Java code
+
+Component interface
+
+```java
+public interface FileSystemComponent {
+    void printStructure(String indent);
+}
+```
+
+Leaf — File
+
+```java
+public class File implements FileSystemComponent {
+    private final String name;
+
+    public File(String name) { this.name = name; }
+
+    @Override
+    public void printStructure(String indent) {
+        System.out.println(indent + "- " + name + " (file)");
+    }
+}
+```
+
+Composite — Directory
+
+```java
+import java.util.ArrayList;
+import java.util.List;
+
+public class Directory implements FileSystemComponent {
+    private final String name;
+    private final List<FileSystemComponent> children = new ArrayList<>();
+
+    public Directory(String name) { this.name = name; }
+
+    public void add(FileSystemComponent component) {
+        children.add(component);
+    }
+
+    public void remove(FileSystemComponent component) {
+        children.remove(component);
+    }
+
+    @Override
+    public void printStructure(String indent) {
+        System.out.println(indent + "+ " + name + " (directory)");
+        for (FileSystemComponent child : children) {
+            child.printStructure(indent + "  ");
+        }
+    }
+}
+```
+
+Client code
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        Directory root = new Directory("Root");
+        Directory etc = new Directory("etc");
+        Directory home = new Directory("home");
+        Directory user = new Directory("user");
+
+        File hosts = new File("hosts");
+        File profile = new File("profile");
+        File notes = new File("notes.txt");
+
+        etc.add(hosts);
+        user.add(profile);
+        user.add(notes);
+        home.add(user);
+        root.add(etc);
+        root.add(home);
+
+        root.printStructure("");
+    }
+}
+```

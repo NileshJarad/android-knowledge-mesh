@@ -127,3 +127,87 @@ Total cost: 11
 - **ContextWrapper**: `ContextWrapper` wraps a `Context` to delegate calls.
 - **ViewGroup**: `FrameLayout` wraps child views to add layout behavior.
 - **RecyclerView**: ItemDecoration adds visual decoration without changing the RecyclerView itself.
+---
+
+### Java code
+
+Component interface
+
+```java
+public interface Coffee {
+    int cost();
+    String description();
+}
+```
+
+Concrete Component
+
+```java
+public class SimpleCoffee implements Coffee {
+    @Override
+    public int cost() { return 5; }
+    @Override
+    public String description() { return "Simple coffee"; }
+}
+```
+
+Abstract Decorator
+
+```java
+public abstract class CoffeeDecorator implements Coffee {
+    protected Coffee coffee;
+
+    public CoffeeDecorator(Coffee coffee) {
+        this.coffee = coffee;
+    }
+
+    @Override
+    public int cost() { return coffee.cost(); }
+    @Override
+    public String description() { return coffee.description(); }
+}
+```
+
+Concrete Decorators
+
+```java
+public class Milk extends CoffeeDecorator {
+    public Milk(Coffee coffee) { super(coffee); }
+    @Override
+    public int cost() { return super.cost() + 2; }
+    @Override
+    public String description() { return super.description() + ", milk"; }
+}
+
+public class Sugar extends CoffeeDecorator {
+    public Sugar(Coffee coffee) { super(coffee); }
+    @Override
+    public int cost() { return super.cost() + 1; }
+    @Override
+    public String description() { return super.description() + ", sugar"; }
+}
+
+public class WhippedCream extends CoffeeDecorator {
+    public WhippedCream(Coffee coffee) { super(coffee); }
+    @Override
+    public int cost() { return super.cost() + 3; }
+    @Override
+    public String description() { return super.description() + ", whipped cream"; }
+}
+```
+
+Client code
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        Coffee coffee = new SimpleCoffee();
+        coffee = new Milk(coffee);
+        coffee = new Sugar(coffee);
+        coffee = new WhippedCream(coffee);
+
+        System.out.println(coffee.description());
+        System.out.println("Total cost: " + coffee.cost());
+    }
+}
+```

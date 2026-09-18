@@ -1,0 +1,31 @@
+@startuml Iterator
+interface Iterator<E> {
+    +hasNext(): Boolean
+    +next(): E
+}
+
+interface Iterable<E> {
+    +iterator(): Iterator<E>
+    +add(item: E)
+}
+
+class ListIterator<T> {
+    -items: List<T>
+    -position: Int
+    +hasNext(): Boolean
+    +next(): T
+}
+
+class OwnList<E> {
+    -items: MutableList<E>
+    +iterator(): Iterator<E>
+    +add(item: E)
+    +hasNext(): Boolean
+}
+
+Iterator <|.. ListIterator
+Iterable <|.. OwnList
+OwnList --> ListIterator
+ListIterator --> List
+
+@enduml

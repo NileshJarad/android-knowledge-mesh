@@ -103,3 +103,65 @@ fun main() {
 ### Android Use Case
 - **FragmentManager**: Simplifies fragment transactions.
 - **Room**: Simplifies database operations with a single `Room.databaseBuilder()` call.
+---
+
+### Java code
+
+Subsystems
+
+```java
+public class Catalog {
+    public boolean searchBook(String title) {
+        System.out.println("Searching catalog for: " + title);
+        return true;
+    }
+}
+
+public class Lending {
+    public boolean checkOut(String bookId) {
+        System.out.println("Checking out: " + bookId);
+        return true;
+    }
+
+    public void checkIn(String bookId) {
+        System.out.println("Checking in: " + bookId);
+    }
+}
+```
+
+Facade
+
+```java
+public class LibraryFacade {
+    private final Catalog catalog;
+    private final Lending lending;
+
+    public LibraryFacade(Catalog catalog, Lending lending) {
+        this.catalog = catalog;
+        this.lending = lending;
+    }
+
+    public void borrowBook(String title) {
+        if (catalog.searchBook(title)) {
+            lending.checkOut(title);
+        }
+    }
+
+    public void returnBook(String bookId) {
+        lending.checkIn(bookId);
+    }
+}
+```
+
+Client code
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        LibraryFacade library = new LibraryFacade(new Catalog(), new Lending());
+
+        library.borrowBook("Android Design Patterns");
+        library.returnBook("Android Design Patterns");
+    }
+}
+```

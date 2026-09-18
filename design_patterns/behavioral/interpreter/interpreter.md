@@ -119,6 +119,130 @@ fun main() {
 }
 ```
 
+### Java code
+
+Expression interface
+
+```java
+public interface Expression {
+    boolean interpret(Context context);
+}
+```
+
+Terminal Expression — Variable
+
+```java
+public class VariableExpression implements Expression {
+    private final String name;
+
+    public VariableExpression(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public boolean interpret(Context context) {
+        return context.lookup(name);
+    }
+}
+```
+
+Non-terminal Expression — And
+
+```java
+public class AndExpression implements Expression {
+    private final Expression expr1;
+    private final Expression expr2;
+
+    public AndExpression(Expression expr1, Expression expr2) {
+        this.expr1 = expr1;
+        this.expr2 = expr2;
+    }
+
+    @Override
+    public boolean interpret(Context context) {
+        return expr1.interpret(context) && expr2.interpret(context);
+    }
+}
+```
+
+Non-terminal Expression — Or
+
+```java
+public class OrExpression implements Expression {
+    private final Expression expr1;
+    private final Expression expr2;
+
+    public OrExpression(Expression expr1, Expression expr2) {
+        this.expr1 = expr1;
+        this.expr2 = expr2;
+    }
+
+    @Override
+    public boolean interpret(Context context) {
+        return expr1.interpret(context) || expr2.interpret(context);
+    }
+}
+```
+
+Non-terminal Expression — Not
+
+```java
+public class NotExpression implements Expression {
+    private final Expression expr;
+
+    public NotExpression(Expression expr) {
+        this.expr = expr;
+    }
+
+    @Override
+    public boolean interpret(Context context) {
+        return !expr.interpret(context);
+    }
+}
+```
+
+Context class
+
+```java
+import java.util.HashMap;
+import java.util.Map;
+
+public class Context {
+    private final Map<String, Boolean> variables = new HashMap<>();
+
+    public void assign(String varName, boolean value) {
+        variables.put(varName, value);
+    }
+
+    public boolean lookup(String varName) {
+        return variables.getOrDefault(varName, false);
+    }
+}
+```
+
+Client code
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        Context context = new Context();
+        context.assign("A", true);
+        context.assign("B", false);
+
+        Expression expression = new AndExpression(
+                new VariableExpression("A"),
+                new OrExpression(
+                        new VariableExpression("B"),
+                        new NotExpression(new VariableExpression("A"))
+                )
+        );
+
+        boolean result = expression.interpret(context);
+        System.out.println("Result: " + result);
+    }
+}
+```
+
 ---
 
 ### Android Use Case

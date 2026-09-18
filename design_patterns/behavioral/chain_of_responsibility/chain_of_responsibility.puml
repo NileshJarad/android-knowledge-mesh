@@ -1,0 +1,27 @@
+@startuml ChainOfResponsibility
+abstract class Handler {
+    -nextHandler: Handler
+    +setNext(h: Handler): Handler
+    +handle(request: Request): Boolean
+    +canHandle(request: Request): Boolean
+    +process(request: Request)
+}
+
+class Request {
+    -level: String
+    -message: String
+    +getLevel(): String
+    +getMessage(): String
+}
+
+Handler <|-- DebugHandler
+Handler <|-- InfoHandler
+Handler <|-- ErrorHandler
+
+DebugHandler -> Request: handles DEBUG
+InfoHandler -> Request: handles INFO
+ErrorHandler -> Request: handles ERROR
+
+Handler: handle() or pass to next
+
+@enduml
