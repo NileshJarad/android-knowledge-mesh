@@ -1,0 +1,22 @@
+@startuml DependencyInversion
+interface Database {
+    +connect()
+    +disconnect()
+    +executeQuery(query: String): List<Any>
+}
+
+class DatabaseService {
+    +connect()
+    +disconnect()
+    +executeQuery(query: String): List<Any>
+}
+
+class UserService {
+    -db: Database
+    +getUsers(): List<User>
+}
+
+Database <|.. DatabaseService
+UserService --> Database
+
+@enduml

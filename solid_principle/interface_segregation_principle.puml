@@ -1,0 +1,23 @@
+@startuml InterfaceSegregation
+interface Workable {
+    +work()
+}
+
+interface Eatable {
+    +eat()
+}
+
+class HumanWorker {
+    +work()
+    +eat()
+}
+
+class RobotWorker {
+    +work()
+}
+
+Workable <|.. HumanWorker
+Workable <|.. RobotWorker
+Eatable <|.. HumanWorker
+
+@enduml

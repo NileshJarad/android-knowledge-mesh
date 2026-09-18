@@ -1,0 +1,27 @@
+@startuml OpenClosed
+abstract class Shape {
+    +area(): Double
+}
+
+class Rectangle {
+    -width: Double
+    -height: Double
+    +area(): Double
+}
+
+class Circle {
+    -radius: Double
+    +area(): Double
+}
+
+class Triangle {
+    -base: Double
+    -height: Double
+    +area(): Double
+}
+
+Shape <|.. Rectangle
+Shape <|.. Circle
+Shape <|.. Triangle
+
+@enduml

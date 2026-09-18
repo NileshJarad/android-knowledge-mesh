@@ -1,0 +1,21 @@
+@startuml SingleResponsibility
+class UserManager {
+    -userDatabase: UserDatabaseService
+    -emailService: EmailService
+    +createUser(user: User)
+    +updateUser(user: User)
+}
+
+class UserDatabaseService {
+    +createUser(user: User)
+    +updateUser(user: User)
+}
+
+class EmailService {
+    +sendWelcomeEmail(user: User)
+}
+
+UserManager --> UserDatabaseService
+UserManager --> EmailService
+
+@enduml

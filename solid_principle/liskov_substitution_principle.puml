@@ -1,0 +1,23 @@
+@startuml LiskovSubstitution
+interface Bird {
+    +eat()
+}
+
+interface FlyingBird {
+    +fly()
+}
+
+class Sparrow {
+    +eat()
+    +fly()
+}
+
+class Ostrich {
+    +eat()
+}
+
+Bird <|.. Sparrow
+Bird <|.. Ostrich
+FlyingBird <|.. Sparrow
+
+@enduml
