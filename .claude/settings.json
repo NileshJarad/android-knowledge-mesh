@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find /Users/nileshjarad/Downloads/coding/kotlin_java -type d -name \"data_structure\" | head -10)",
+      "Read(//Users/nileshjarad/Downloads/coding/kotlin_java/**)"
+    ]
+  }
+}
