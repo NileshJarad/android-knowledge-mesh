@@ -16,12 +16,12 @@
 - [x] recursion_backtracking - Theory | Solutions
 - [x] trees - Theory | Solutions
 - [x] heap_priority_queue - Theory | Solutions
-- [ ] tries - Theory | Solutions
-- [ ] graphs - Theory | Solutions
-- [ ] advanced_graphs - Theory | Solutions
-- [ ] dp_1d - Theory | Solutions
-- [ ] dp_2d - Theory | Solutions
-- [ ] greedy_intervals - Theory | Solutions
-- [ ] mixed_revision - Theory | Solutions
+- [x] tries - Theory | Solutions
+- [x] graphs - Theory | Solutions
+- [x] advanced_graphs - Theory | Solutions
+- [x] dp_1d - Theory | Solutions
+- [x] dp_2d - Theory | Solutions
+- [x] greedy_intervals - Theory | Solutions
+- [x] mixed_revision - Theory | Solutions
 
 ## Target: Complete all 18 topics
